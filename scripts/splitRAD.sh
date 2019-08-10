@@ -1,11 +1,27 @@
-###########
-## NOTE: ## This project uses the LAST 48 wells on a plate--adjust barcodes accordingly.
-###########
+#!/bin/bash
+#
+# NOTE : This script will split plates and barcodes for RAD sequencing data.
 
+
+
+###############
+###  SETUP  ###
+###############
+
+# external variables
 PROJ=$1
 BARCODE=$2
 DATA_DIR=$3
 SCRIPT_DIR=$4
+
+echo Project : ${PROJ}
+echo Barcode : ${BARCODE}
+echo Data directory : ${DATA_DIR}
+echo Master scripts directory : ${SCRIPT_DIR}
+echo ""
+
+
+
 
 pop="sexMarker"
 

@@ -48,3 +48,9 @@ master_scripts="/home/sejoslin/scripts"
 ###  RUN  ###
 #############
 bash ${script_dir}/splitRAD.sh ${project} ${b} ${data_dir} ${master_scripts}
+
+
+
+end=`date +%s`
+runtime=$((end-start))
+echo Runtime: $runtime
