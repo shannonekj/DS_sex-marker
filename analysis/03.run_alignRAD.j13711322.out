@@ -1,0 +1,79 @@
+==========================================
+SLURM_JOB_ID = 13711322
+SLURM_NODELIST = c10-15
+==========================================
+Hello sejoslin, the current time is 11:51:43 19/08/27 in the Holocene Epoch of the Quaternary Period
+...you may be outdated but at least you're updated.
+c10-15
+My SLURM_JOB_ID: 13711322
+Setting up variables
+Navigating to BMAG051
+CCGTCC
+Submitted batch job 13711854
+Submitted batch job 13711855
+Submitted batch job 13711856
+Submitted batch job 13711857
+Submitted batch job 13711858
+Submitted batch job 13711859
+Submitted batch job 13711860
+Submitted batch job 13711861
+Submitted batch job 13711862
+Submitted batch job 13711863
+Submitted batch job 13711864
+Submitted batch job 13711865
+Submitted batch job 13711866
+Submitted batch job 13711867
+Submitted batch job 13711868
+Submitted batch job 13711869
+Submitted batch job 13711870
+Submitted batch job 13711871
+Submitted batch job 13711872
+Submitted batch job 13711873
+Submitted batch job 13711874
+Submitted batch job 13711875
+Submitted batch job 13711876
+Submitted batch job 13711877
+Submitted batch job 13711878
+Submitted batch job 13711879
+Submitted batch job 13711880
+Submitted batch job 13711881
+Submitted batch job 13711882
+Submitted batch job 13711883
+Submitted batch job 13711884
+Submitted batch job 13711885
+Submitted batch job 13711886
+Submitted batch job 13711887
+Submitted batch job 13711888
+Submitted batch job 13711889
+Submitted batch job 13711890
+Submitted batch job 13711891
+Submitted batch job 13711892
+Submitted batch job 13711893
+Submitted batch job 13711894
+Submitted batch job 13711895
+Submitted batch job 13711896
+Submitted batch job 13711897
+Submitted batch job 13711898
+Submitted batch job 13711899
+Submitted batch job 13711900
+Submitted batch job 13711901
+Runtime : 614
+Name                : alignRAD
+User                : sejoslin
+Partition           : high
+Nodes               : c10-15
+Cores               : 20
+GPUs                : 0
+State               : COMPLETED
+Submit              : 2019-08-27T11:48:43
+Start               : 2019-08-27T11:51:43
+End                 : 2019-08-27T12:01:58
+Reserved walltime   : 04:00:00
+Used walltime       : 00:10:15
+Used CPU time       : 00:09:11
+% User (Computation): 99.32%
+% System (I/O)      :  0.68%
+Mem reserved        : 32G/node
+Max Mem used        : 788.69M (c10-15)
+Max Disk Write      : 532.33M (c10-15)
+Max Disk Read       : 158.69M (c10-15)
