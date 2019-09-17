@@ -1,0 +1,184 @@
+
+hostname
+start=`date +%s`
+echo "My SLURM_JOB_ID: $SLURM_JOB_ID"
+
+###############
+###  SETUP  ###
+###############
+proj="DS_sex-marker"
+
+# directories
+script_dir="/home/sejoslin/git_repos/${proj}/scripts"
+data_dir="/home/sejoslin/projects/sexMarker/data"
+bam_dir="${data_dir}/RAD_alignments"
+out_dir="${data_dir}/doAssociation"
+
+# files
+	# make bam
+cd ${bam_dir}
+ls -al ${bam_dir}/*.sort.proper.rmdup.bam | awk '{print $9}' >> ${bam_dir}/sex.bamlist
+bamlist="${bam_dir}/sex.bamlist"
+ybin="/home/sejoslin/git_repos/DS_sex-marker/metadata/DS_sex-marker.pheno.ybin"
+
+
+
+#############
+###  RUN  ###
+#############
+
+bash ${script_dir}/doAssoc.sh ${out_dir} ${bamlist} ${proj} ${ybin}
+
+
+###############
+###  SETUP  ###
+###############
+
+echo "Setting up modules" $(date +%D' '%T)
+module load bio
+Module bio/1.0 loaded 
+LD_LIBRARY_PATH=/share/apps/bio/bio/pkgs/gsl-1.16-0/lib:/share/apps/bio/bio/pkgs/hdf5-1.8.17-2/lib:/share/apps/bio/bio/lib:/share/apps/openmpi-4.0.1/gcc7/lib:/share/apps/slurm-18.08.7/18.04/lib; export LD_LIBRARY_PATH;
+MANPATH=/share/apps/bio/bio/man:/share/apps/openmpi-4.0.1/gcc7/share/man:/share/apps/slurm-18.08.7/18.04/share/man:::/opt/puppetlabs/puppet/share/man; export MANPATH;
+PERL5LIB_modshare=/share/apps/bio/bio/lib/5.26.2/x86-64-linux-thread-multi:1:/share/apps/bio/bio/lib/breakdancer-maxunstable:1:/share/apps/bio/bio/lib/5.26.2:1; export PERL5LIB_modshare;
+BIO_HOME=/share/apps/bio/bio; export BIO_HOME;
+LOADEDMODULES=slurm/18.08.7:openmpi/4.0.1:bio/1.0; export LOADEDMODULES;
+_LMFILES_=/share/apps/modulefiles/hpc/slurm/18.08.7:/share/apps/modulefiles/hpc/openmpi/4.0.1:/share/apps/modulefiles/hpc/bio/1.0; export _LMFILES_;
+MANPATH_modshare=:1:/share/apps/bio/bio/man:1:/share/apps/openmpi-4.0.1/gcc7/share/man:1:/share/apps/slurm-18.08.7/18.04/share/man:1:/opt/puppetlabs/puppet/share/man:1; export MANPATH_modshare;
+LD_LIBRARY_PATH_modshare=/share/apps/bio/bio/pkgs/hdf5-1.8.17-2/lib:1:/share/apps/slurm-18.08.7/18.04/lib:1:/share/apps/bio/bio/lib:1:/share/apps/bio/bio/pkgs/gsl-1.16-0/lib:1:/share/apps/openmpi-4.0.1/gcc7/lib:1; export LD_LIBRARY_PATH_modshare;
+_LMFILES__modshare=/share/apps/modulefiles/hpc/slurm/18.08.7:1:/share/apps/modulefiles/hpc/bio/1.0:1:/share/apps/modulefiles/hpc/openmpi/4.0.1:1; export _LMFILES__modshare;
+LOADEDMODULES_modshare=bio/1.0:1:openmpi/4.0.1:1:slurm/18.08.7:1; export LOADEDMODULES_modshare;
+PATH=/share/apps/bio/bio/sbin:/share/apps/bio/bio/bin:/share/apps/bio/bio/lib/breakdancer-maxunstable:/share/apps/openmpi-4.0.1/gcc7/bin:/share/apps/slurm-18.08.7/18.04/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/sejoslin/bin:/home/sejoslin/scripts:/home/sejoslin/ANGSD_versions/angsd:/home/sejoslin/bin/ngsTools/ngsF:/home/sejoslin/miniconda3/bin:/opt/puppetlabs/bin:/home/sejoslin/bin:/home/sejoslin/scripts:/home/sejoslin/ANGSD_versions/angsd:/home/sejoslin/bin/ngsTools/ngsF:/home/sejoslin/miniconda3/bin; export PATH;
+PATH_modshare=/usr/bin:1:/share/apps/slurm-18.08.7/18.04/bin:1:/home/sejoslin/miniconda3/bin:1:/home/sejoslin/bin/ngsTools/ngsF:1:/usr/local/bin:1:/share/apps/openmpi-4.0.1/gcc7/bin:1:/home/sejoslin/bin:1:/home/sejoslin/ANGSD_versions/angsd:1:/bin:1:/opt/puppetlabs/bin:1:/snap/bin:1:/share/apps/bio/bio/sbin:1:/sbin:1:/usr/sbin:1:/usr/games:1:/home/sejoslin/scripts:1:/usr/local/sbin:1:/share/apps/bio/bio/bin:1:/share/apps/bio/bio/lib/breakdancer-maxunstable:1:/usr/local/games:1; export PATH_modshare;
+PERL5LIB=/share/apps/bio/bio/lib/breakdancer-maxunstable:/share/apps/bio/bio/lib/5.26.2/x86-64-linux-thread-multi:/share/apps/bio/bio/lib/5.26.2; export PERL5LIB;
+test 0;
+angsd -version # this doesn't actually print a version number in one line but rather prints an error that contains the version number in it
+	-> angsd version: 0.921 (htslib: 1.9) build(Aug  6 2018 13:54:50)
+	-> Analysis helpbox/synopsis information:
+	-> Command: 
+angsd -version 	-> Tue Sep 17 13:46:56 2019
+--------------------
+[shared.cpp:init()]
+	-nThreads	1	Number of threads to use
+	-nQueueSize	-1	Maximum number of queud elements
+	-howOften	100	How often should the program show progress
+
+Unknown argument supplied: '-version'
+
+
+	-> angsd version: 0.921 (htslib: 1.9) build(Aug  6 2018 13:54:50)
+	-> Please use the website "http://www.popgen.dk/angsd" as reference
+	-> Use -nThreads or -P for number of threads allocated to the program
+Overview of methods:
+	-GL		Estimate genotype likelihoods
+	-doCounts	Calculate various counts statistics
+	-doAsso		Perform association study
+	-doMaf		Estimate allele frequencies
+	-doError	Estimate the type specific error rates
+	-doAncError	Estimate the errorrate based on perfect fastas
+	-HWE_pval	Est inbreedning per site or use as filter
+	-doGeno		Call genotypes
+	-doFasta	Generate a fasta for a BAM file
+	-doAbbababa	Perform an ABBA-BABA test
+	-sites		Analyse specific sites (can force major/minor)
+	-doSaf		Estimate the SFS and/or neutrality tests genotype calling
+	-doHetPlas	Estimate hetplasmy by calculating a pooled haploid frequency
+
+	Below are options that can be usefull
+	-bam		Options relating to bam reading
+	-doMajorMinor	Infer the major/minor using different approaches
+	-ref/-anc	Read reference or ancestral genome
+	-doSNPstat	Calculate various SNPstat
+	-cigstat	Printout CIGAR stat across readlength
+	many others
+
+For information of specific options type: 
+	./angsd METHODNAME eg 
+		./angsd -GL
+		./angsd -doMaf
+		./angsd -doAsso etc
+		./angsd sites for information about indexing -sites files
+Examples:
+	Estimate MAF for bam files in 'list'
+		'./angsd -bam list -GL 2 -doMaf 2 -out RES -doMajorMinor 1'
+
+echo "Setting up variables" $(date +%D' '%T)
+# external
+OUT_dir=$1	# directory where output will be written to
+BAMLIST=$2	# list of bamfiles (global path)
+PROJ=$3		# project ID
+YBIN=$4		# phenotype file
+
+
+
+###################
+###  DO THINGS  ###
+###################
+
+echo "Doing things!" $(date +%D' '%T)
+
+mkdir -p ${OUT_dir}
+cd ${OUT_dir}
+
+for i in $(seq 2 3)
+do
+	call_assoc="angsd -yBin ${YBIN} \
+	-bam ${BAMLIST} \
+	-model ${i} \
+	-doAsso 1 \
+	-GL 1 \
+	-doMajorMinor 1 \
+	-doMaf 1 \
+	-SNP_pval 1e-6 \
+	-out assoc_model${i}_${PROJ}"
+	echo ${call_assoc}
+	eval ${call_assoc}
+	echo ""
+done
+angsd -yBin /home/sejoslin/git_repos/DS_sex-marker/metadata/DS_sex-marker.pheno.ybin -bam /home/sejoslin/projects/sexMarker/data/RAD_alignments/sex.bamlist -model 2 -doAsso 1 -GL 1 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -out assoc_model2_DS_sex-marker
+	-> angsd version: 0.921 (htslib: 1.9) build(Aug  6 2018 13:54:50)
+	-> SNP-filter using a pvalue: 1.000000e-06 correspond to 23.928127 likelihood units
+	-> Parsing 48 number of samples 
+	-> Printing at chr: 32 pos:679353 chunknumber 100 contains 600 sites
+	-> Printing at chr: 32 pos:1781989 chunknumber 200 contains 513 sites
+	-> Printing at chr: 32 pos:2500894 chunknumber 300 contains 290 sites
+	-> Printing at chr: 32 pos:3386999 chunknumber 400 contains 509 sites
+	-> Printing at chr: 32 pos:4124786 chunknumber 500 contains 1156 sites
+	-> Printing at chr: 32 pos:4956152 chunknumber 600 contains 193 sites
+	-> Printing at chr: 32 pos:5802500 chunknumber 700 contains 2555 sites
+	-> Printing at chr: 32 pos:7016446 chunknumber 800 contains 1116 sites
+	-> Printing at chr: 32 pos:8268988 chunknumber 900 contains 742 sites
+	-> Printing at chr: 32 pos:9212318 chunknumber 1000 contains 255 sites
+	-> Printing at chr: 32 pos:10257488 chunknumber 1100 contains 457 sites
+	-> Printing at chr: 32 pos:11304260 chunknumber 1200 contains 673 sites
+	-> Printing at chr: 32 pos:12364514 chunknumber 1300 contains 934 sites
+	-> Printing at chr: 33 pos:439232 chunknumber 1400 contains 722 sites
+	-> Printing at chr: 33 pos:1286899 chunknumber 1500 contains 1116 sites
+	-> Printing at chr: 33 pos:2054183 chunknumber 1600 contains 930 sites
+	-> Printing at chr: 33 pos:2900931 chunknumber 1700 contains 254 sites
+	-> Printing at chr: 33 pos:3631803 chunknumber 1800 contains 458 sites
+	-> Printing at chr: 33 pos:4388664 chunknumber 1900 contains 1401 sites
+	-> Printing at chr: 33 pos:5145334 chunknumber 2000 contains 829 sites
+	-> Printing at chr: 33 pos:5823132 chunknumber 2100 contains 598 sites
+	-> Printing at chr: 33 pos:6418797 chunknumber 2200 contains 1143 sites
+	-> Printing at chr: 33 pos:6952643 chunknumber 2300 contains 1655 sites
+	-> Printing at chr: 33 pos:7677749 chunknumber 2400 contains 494 sites
+	-> Printing at chr: 33 pos:8648194 chunknumber 2500 contains 1435 sites
+	-> Printing at chr: 33 pos:9592280 chunknumber 2600 contains 323 sites
+	-> Printing at chr: 33 pos:10080951 chunknumber 2700 contains 1169 sites
+	-> Printing at chr: 33 pos:10759414 chunknumber 2800 contains 865 sites
+	-> Printing at chr: 33 pos:11632298 chunknumber 2900 contains 1248 sites
+	-> Printing at chr: 33 pos:12380113 chunknumber 3000 contains 1254 sites
+	-> Printing at chr: 33 pos:13078061 chunknumber 3100 contains 1337 sites
+	-> Printing at chr: 33 pos:13669413 chunknumber 3200 contains 2016 sites
+	-> Printing at chr: 33 pos:14471710 chunknumber 3300 contains 920 sites
+	-> Printing at chr: 33 pos:14929280 chunknumber 3400 contains 1397 sites
+	-> Printing at chr: 33 pos:15944625 chunknumber 3500 contains 1490 sites
+	-> Printing at chr: 33 pos:16678004 chunknumber 3600 contains 1528 sites
+	-> Printing at chr: 34 pos:303714 chunknumber 3700 contains 1241 sites
+	-> Printing at chr: 34 pos:1266703 chunknumber 3800 contains 1793 sites
+	-> Printing at chr: 34 pos:2462295 chunknumber 3900 contains 497 sites
+	-> Printing at chr: 35 pos:502929 chunknumber 4000 contains 325 sites
+	-> Printing at chr: 35 pos:1518995 chunknumber 4100 contains 2824 sites
+	-> Printing at chr: 35 pos:2645336 chunknumber 4200 contains 1976 sites
+	-> Printing at chr: 35 pos:3912966 chunknumber 4300 contains 695 sites
+	-> Printing at chr: 36 pos:33199 chunknumber 4400 contains 885 sites

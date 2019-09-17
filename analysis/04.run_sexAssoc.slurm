@@ -28,10 +28,11 @@ bam_dir="${data_dir}/RAD_alignments"
 out_dir="${data_dir}/doAssociation"
 
 # files
-	#make bam
+	# make bam
 cd ${bam_dir}
-ls -al ${bam_dir}/*.sort.proper.rmdup.bam | awk '{print $9}' >> sex.bamlist
+ls -al ${bam_dir}/*.sort.proper.rmdup.bam | awk '{print $9}' >> ${bam_dir}/sex.bamlist
 bamlist="${bam_dir}/sex.bamlist"
+ybin="/home/sejoslin/git_repos/DS_sex-marker/metadata/DS_sex-marker.pheno.ybin"
 
 
 
@@ -39,7 +40,7 @@ bamlist="${bam_dir}/sex.bamlist"
 ###  RUN  ###
 #############
 
-bash ${script_dir}/doAssoc.sh ${out_dir} ${bamlist} ${proj}i
+bash ${script_dir}/doAssoc.sh ${out_dir} ${bamlist} ${proj} ${ybin}
 
 
 

@@ -1,0 +1,12 @@
+==========================================
+SLURM_JOB_ID = 14115592
+SLURM_NODELIST = c8-69
+==========================================
+Hello sejoslin, the current time is 13:46:56 19/09/17 in the Holocene Epoch of the Quaternary Period
+...you may be outdated but at least you're updated.
+c8-69
+My SLURM_JOB_ID: 14115592
+Setting up modules 09/17/19 13:46:56
+Setting up variables 09/17/19 13:46:56
+Doing things! 09/17/19 13:46:56
+angsd -yBin /home/sejoslin/git_repos/DS_sex-marker/metadata/DS_sex-marker.pheno.ybin -bam /home/sejoslin/projects/sexMarker/data/RAD_alignments/sex.bamlist -model 2 -doAsso 1 -GL 1 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -out assoc_model2_DS_sex-marker
