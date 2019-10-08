@@ -1,0 +1,27 @@
+==========================================
+SLURM_JOB_ID = 14317883
+SLURM_NODELIST = c8-62
+==========================================
+Setting up variables
+Entering: BMAG051
+Finding line counts in:
+    CCGTCC
+Name                : findBEST
+User                : sejoslin
+Partition           : high
+Nodes               : c8-62
+Cores               : 20
+GPUs                : 0
+State               : COMPLETED
+Submit              : 2019-10-07T16:28:55
+Start               : 2019-10-07T16:28:56
+End                 : 2019-10-07T16:29:37
+Reserved walltime   : 00:12:00
+Used walltime       : 00:00:41
+Used CPU time       : 00:00:10
+% User (Computation): 32.19%
+% System (I/O)      : 67.80%
+Mem reserved        : 2000M/core
+Max Mem used        : 964.00K (c8-62)
+Max Disk Write      : 0.00  (c8-62)
+Max Disk Read       : 532.48K (c8-62)
