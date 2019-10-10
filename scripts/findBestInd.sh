@@ -4,6 +4,7 @@
 #	INPUT: Raw FASTQ files
 #	OUTPUT: Sorted list of individual files and the number of reads sequenced
 
+set -x
 set -e
 set -v
 
@@ -47,7 +48,14 @@ do
 		index=$(echo ${library} | cut -d. -f3)
 		echo "    ${index}"
 		cd ${index}
-		wc -l *R1.fastq >> ${sum_file}
+		for j in *_R1.fastq
+		do
+			echo $j
+			full=$(wc -l $j)
+			line_count=$(echo ${full} | awk '{print $1}')
+			base=$(basename ${j} _R1.fastq)
+		        echo -e ${line_count}"\t"${base}"\t"${i}"\t"${index}>> ${sum_file}
+		done
 		cd ../
 	done
 	cd ../
@@ -60,3 +68,6 @@ sort -n -r ${sum_file} > ${sum_file}.sorted
 n=$(( $N + 1 ))
 head -${n} ${sum_file}.sorted >> ${sum_file}.best
 sed -i '1d' ${sum_file}.best
+
+
+
