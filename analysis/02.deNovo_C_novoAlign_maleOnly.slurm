@@ -25,7 +25,7 @@ script_dir="/home/sejoslin/git_repos/DS_sex-marker/scripts"
 data_dir="/group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo/maleOnly"
 
 # files
-prefix="SexMarker"
+prefix="SexMarker_M"
 
 
 #############

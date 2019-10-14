@@ -1,0 +1,42 @@
+==========================================
+SLURM_JOB_ID = 14398410
+SLURM_NODELIST = c8-90
+==========================================
+Setting up variables
+Running RAD_deNovo_novoAlign.sh
+
+Setting up variables
+Data directory: /group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo/maleOnly
+Prefix: SexMarker
+
+Indexing fasta files 10/10/19 16:44:39
+# novoindex (2.8) - Universal k-mer index constructor.
+# (C) 2008 - 2011 NovoCraft Technologies Sdn Bhd
+# novoindex SexMarker.fa.index SexMarker.fasta 
+# Creating 24 indexing threads.
+# Building with 11-mer and step of 1 bp.
+# novoindex construction dT = 25.3s
+# Index memory size   0.178Gbyte.
+# Done.
+    Done!
+Aligning reads 10/10/19 16:45:04
+    Done!
+Name                : novo
+User                : sejoslin
+Partition           : high
+Nodes               : c8-90
+Cores               : 20
+GPUs                : 0
+State               : COMPLETED
+Submit              : 2019-10-10T16:44:34
+Start               : 2019-10-10T16:44:34
+End                 : 2019-10-10T17:06:11
+Reserved walltime   : 1-20:00:00
+Used walltime       :   00:21:37
+Used CPU time       :   00:21:53
+% User (Computation): 98.93%
+% System (I/O)      :  1.07%
+Mem reserved        : 32G/node
+Max Mem used        : 9.39M (c8-90)
+Max Disk Write      : 0.00  (c8-90)
+Max Disk Read       : 532.48K (c8-90)

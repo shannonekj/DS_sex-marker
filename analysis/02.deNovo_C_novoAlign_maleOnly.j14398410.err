@@ -1,0 +1,55 @@
+
+
+
+###############
+###  SETUP  ###
+###############
+
+echo "Setting up variables"
+
+# directories
+script_dir="/home/sejoslin/git_repos/DS_sex-marker/scripts"
+data_dir="/group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo/maleOnly"
+
+# files
+prefix="SexMarker"
+
+
+#############
+###  RUN  ###
+#############
+echo "Running RAD_deNovo_novoAlign.sh"
+echo ""
+bash ${script_dir}/RAD_deNovo_novoAlign.sh ${data_dir} ${prefix}
+
+###############
+###  SETUP  ###
+###############
+echo "Setting up variables"
+
+# external
+DATA_dir=$1     # directory where raw split fastq files are located
+PREFIX=$2       # prefix of project
+
+echo "Data directory: ${DATA_dir}"
+echo "Prefix: ${PREFIX}"
+echo ""
+
+
+
+###################
+###  DO THINGS  ###
+###################
+cd ${DATA_dir}
+
+## index ##
+echo "Indexing fasta files $(date +%D' '%T)"
+novoindex ${PREFIX}.fa.index ${PREFIX}.fasta
+chmod a=r ${PREFIX}.fa.index
+echo "    Done!"
+
+## align ##
+echo "Aligning reads $(date +%D' '%T)"
+novoalign  -r E 48 -t 180 -d ${PREFIX}.fa.index -f ${PREFIX}.fasta > ${PREFIX}.novo
+chmod a=r ${PREFIX}.novo
+echo "    Done!"

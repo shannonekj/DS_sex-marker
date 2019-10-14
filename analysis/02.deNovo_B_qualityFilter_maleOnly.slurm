@@ -19,8 +19,8 @@ data_dir="/home/sejoslin/projects/sexMarker/data"
 out_dir="/group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo/maleOnly"
 
 # other
-best_file="${out_dir}/SexMarker_line_count.maleOnly.best"
-prefix="SexMarker"
+best_file="${out_dir}/SexMarker_M_line_count.maleOnly.best"
+prefix="SexMarker_M"
 
 
 ##  RUN  ##

@@ -18,7 +18,7 @@ data_dir="/home/sejoslin/projects/sexMarker/data"
 out_dir="/group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo/maleOnly"
 
 # other
-prefix="SexMarker"
+prefix="SexMarker_M"
 n="4"
 
 
@@ -27,5 +27,5 @@ bash ${script_dir}/findBestInd.sh ${data_dir} ${out_dir} ${prefix} ${n}
 
 # make best file with only males
 cd ${out_dir}
-grep _M_ SexMarker_line_count.all.sorted >> SexMarker_line_count.maleOnly.sorted
-head -${n} SexMarker_line_count.maleOnly.sorted >> SexMarker_line_count.maleOnly.best
+grep _M_ SexMarker_M_line_count.all.sorted >> SexMarker_M_line_count.maleOnly.sorted
+head -${n} SexMarker_M_line_count.maleOnly.sorted >> SexMarker_M_line_count.maleOnly.best
