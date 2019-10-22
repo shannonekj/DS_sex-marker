@@ -1,16 +1,3 @@
-#!/bin/bash
-#BATCH --mail-user=sejoslin@ucdavis.edu
-#SBATCH --mail-type=ALL
-#SBATCH -J idLoci
-#SBATCH -e 02.deNovo_D_idLoci_maleOnly.j%j.err
-#SBATCH -o 02.deNovo_D_idLoci_maleOnly.j%j.out
-#SBATCH -c 20
-#SBATCH -p high
-#SBATCH --time=1-20:00:00
-#SBATCH --mem=32G
-
-set -e # exits upon failing command
-set -v # verbose -- all lines
 
 
 
@@ -64,6 +51,46 @@ chmod a+x IdentifyLoci3.${prefix}.pl
 echo "Running RAD_deNovo_idLoci.sh"
 echo ""
 bash ${script_dir}/RAD_deNovo_idLoci.sh ${data_dir} ${script_dir} ${code_dir} ${prefix}
+
+
+###############
+###  SETUP  ###
+###############
+echo "Setting up variables"
+echo ""
+
+# external
+DATA_dir=$1     # directory where novo scripts are located
+SCRIPT_dir=$2	# directory with project scripts 
+CODE_dir=$3	# directory with perl scripts
+PREFIX=$4	# prefix of project
+
+echo "Data directory: ${DATA_dir}"
+echo "Script directory: ${SCRIPT_dir}"
+echo "Code directory: ${CODE_dir}"
+echo "Prefix: ${PREFIX}"
+echo ""
+
+
+
+###################
+###  DO THINGS  ###
+###################
+##  identify & count loci
+cd ${DATA_dir}
+
+# Identify loci
+echo "identifying loci -- $(date +%D' '%T)"
+perl ${SCRIPT_dir}/IdentifyLoci3.${PREFIX}.pl ${PREFIX}.novo > ${PREFIX}.loci
+chmod a=r ${PREFIX}.loci
+
+# Then count polymorphic sites
+echo "counting polymorphic sites -- $(date +%D' '%T)"
+perl ${CODE_dir}/SimplifyLoci2.pl ${PREFIX}.loci > ${PREFIX}.simple.loci
+nLoci=$(grep "_2" ${PREFIX}.simple.loci | wc -l)
+echo "    There are ${nLoci} polymorphic sites." 
+chmod a=r ${PREFIX}.simple.loci
+
 
 # grab the first instance of all the sequences
 cd ${data_dir}

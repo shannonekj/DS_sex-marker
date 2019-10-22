@@ -1,0 +1,36 @@
+==========================================
+SLURM_JOB_ID = 14426938
+SLURM_NODELIST = c9-65
+==========================================
+Setting up variables
+Running RAD_deNovo_idLoci.sh
+
+Setting up variables
+
+Data directory: /group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo/maleOnly
+Script directory: /home/sejoslin/git_repos/DS_sex-marker/scripts
+Code directory: /home/sejoslin/scripts
+Prefix: SexMarker_M
+
+identifying loci -- 10/14/19 15:54:34
+counting polymorphic sites -- 10/14/19 15:55:16
+    There are 1125 polymorphic sites.
+Name                : idLoci
+User                : sejoslin
+Partition           : high
+Nodes               : c9-65
+Cores               : 20
+GPUs                : 0
+State               : COMPLETED
+Submit              : 2019-10-14T15:54:27
+Start               : 2019-10-14T15:54:28
+End                 : 2019-10-14T15:55:12
+Reserved walltime   : 1-20:00:00
+Used walltime       :   00:00:44
+Used CPU time       :   00:00:42
+% User (Computation): 97.35%
+% System (I/O)      :  2.65%
+Mem reserved        : 32G/node
+Max Mem used        : 925.45M (c9-65)
+Max Disk Write      : 10.24K (c9-65)
+Max Disk Read       : 542.72K (c9-65)

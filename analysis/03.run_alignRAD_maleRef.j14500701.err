@@ -1,9 +1,31 @@
-#!/bin/bash -l
 
-#	This script will align fastq files to a reference assembly.
+hostname
+start=`date +%s`
+echo "My SLURM_JOB_ID: $SLURM_JOB_ID"
 
-set -e
-set -v
+###############
+###  SETUP  ###
+###############
+proj="DS_sex-marker"
+fq_prefix="RX"
+lib_prefix="BMAG0"
+
+# directories
+script_dir="/home/sejoslin/git_repos/${proj}/scripts"
+data_dir="/home/sejoslin/projects/sexMarker/data"
+bam_dir="/group/millermrgrp2/shannon/projects/${proj}/02-RAD_alignments"
+
+# files
+reference="/group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo/maleOnly/SexMarker_M.simple._1.loci"
+
+# other
+priority="bigmemh"
+
+
+#############
+###  RUN  ###
+#############
+bash ${script_dir}/alignRAD.R1.sh ${data_dir} ${bam_dir} ${lib_prefix} ${fq_prefix} ${proj} ${reference} ${priority}
 
 
 ###############
@@ -57,6 +79,15 @@ echo "    ${PROJ}.RADseqID.list == list of individuals to align (fmt: ind_ID glo
 
 ### Index reference
 bwa index ${REFERENCE}
+[bwa_index] Pack FASTA... 0.19 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 3.68 seconds elapse.
+[bwa_index] Update BWT... 0.07 sec
+[bwa_index] Pack forward-only FASTA... 0.15 sec
+[bwa_index] Construct SA from BWT and Occ... 1.35 sec
+[main] Version: 0.7.17-r1188
+[main] CMD: bwa index /group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo/maleOnly/SexMarker_M.simple._1.loci
+[main] Real time: 5.631 sec; CPU: 5.443 sec
 sleep 1m
 
 ### Align to reference
@@ -79,7 +110,7 @@ do
 #SBATCH -o align_${c1}.j%j.out
 #SBATCH -e align_${c1}.j%j.err
 #SBATCH --mem=32G
-#SBATCH -t 03:00:00
+#SBATCH -t 01:00:00
 #SBATCH -J ${c1}
 
 set -e
@@ -90,25 +121,15 @@ start=\`date +%s\`
 echo "My SLURM_JOB_ID: \$SLURM_JOB_ID"
 
 echo "Aligning reads \$(date)"
-bwa mem ${REFERENCE} ${c2}_R1.fastq ${c2}_R2.fastq | samtools view -Sb - | samtools sort - -o ${c1}.sort.bam
+bwa mem ${REFERENCE} ${c2}_R1.fastq | samtools view -Sb - | samtools sort - -o ${c1}.sort.bam
 
-echo "Pairing reads \$(date)"
-samtools view -f 0x2 -b ${c1}.sort.bam > ${c1}.sort.proper.bam
-
-echo "Removing duplicate reads \$(date)"
-samtools rmdup ${c1}.sort.proper.bam ${c1}.sort.proper.rmdup.bam
-
-sleep 2m
+sleep 1m
 echo "Indexing alignment \$(date)"
-samtools index ${c1}.sort.proper.rmdup.bam ${c1}.sort.proper.rmdup.bam.bai
+samtools index ${c1}.sort.bam ${c1}.sort.bam.bai
 
 ## STATS ##
-reads=\$(samtools view -c ${c1}.sort.bam)
-ppalign=\$(samtools view -c ${c1}.sort.proper.bam)
-rmdup=\$(samtools view -c ${c1}.sort.proper.rmdup.bam)
-echo \"${c1},\${reads},\${ppalign},\${rmdup}\" > ${c1}.stats
+samtools flagstat ${c1}.sort.bam >> ${c1}.sort.bam.flagstat
 
-echo "All statistics have been printed to ${c1}.stats in the following order: aligned reads, aligned properly paired reads, and aligned reads with duplicates removed."
 echo "Job complete at \$(date)"
 
 end=\`date +%s\`
@@ -123,8 +144,10 @@ done
 ###  README  ###
 cat << readme >> ${RAD_dir}/README
     *.sort == all sorted aligned reads
-    *.sort.proper.bam == all sorted & properly paired aligned reads
-    *.sort.proper.rmdup.bam == sorted & properly paired reads with duplicates removed 
-    *sort.proper.rmdup.bam.bai == indexed alignment
-    *.stats == fmt: (all aligned reads) (all aligned & properly paired reads) (aligned, properly paired reads with duplicated removed)
+    *.sort.bam.bai == indexed alignment
+    *.flagstat == statistics for each alignment
 readme
+
+end=`date +%s`
+runtime=$((end-start))
+echo "Runtime : "${runtime}

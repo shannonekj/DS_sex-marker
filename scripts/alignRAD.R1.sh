@@ -19,6 +19,7 @@ LIB_prefix=$3	# prefix to of where fasta data are located
 FQ_prefix=$4	# fastq file prefix 
 PROJ=$5		# project ID 
 REFERENCE=$6	# reference fasta
+PRIORITY=$7	# priority/partition name
 
 ###################
 ###  DO THINGS  ###
@@ -79,8 +80,9 @@ do
 #SBATCH -o align_${c1}.j%j.out
 #SBATCH -e align_${c1}.j%j.err
 #SBATCH --mem=32G
-#SBATCH -t 03:00:00
+#SBATCH -t 01:00:00
 #SBATCH -J ${c1}
+#SBATCH -p ${PRIORITY}
 
 set -e
 set -v
@@ -90,25 +92,15 @@ start=\`date +%s\`
 echo "My SLURM_JOB_ID: \$SLURM_JOB_ID"
 
 echo "Aligning reads \$(date)"
-bwa mem ${REFERENCE} ${c2}_R1.fastq ${c2}_R2.fastq | samtools view -Sb - | samtools sort - -o ${c1}.sort.bam
+bwa mem ${REFERENCE} ${c2}_R1.fastq | samtools view -Sb - | samtools sort - -o ${c1}.sort.bam
 
-echo "Pairing reads \$(date)"
-samtools view -f 0x2 -b ${c1}.sort.bam > ${c1}.sort.proper.bam
-
-echo "Removing duplicate reads \$(date)"
-samtools rmdup ${c1}.sort.proper.bam ${c1}.sort.proper.rmdup.bam
-
-sleep 2m
+sleep 1m
 echo "Indexing alignment \$(date)"
-samtools index ${c1}.sort.proper.rmdup.bam ${c1}.sort.proper.rmdup.bam.bai
+samtools index ${c1}.sort.bam ${c1}.sort.bam.bai
 
 ## STATS ##
-reads=\$(samtools view -c ${c1}.sort.bam)
-ppalign=\$(samtools view -c ${c1}.sort.proper.bam)
-rmdup=\$(samtools view -c ${c1}.sort.proper.rmdup.bam)
-echo \"${c1},\${reads},\${ppalign},\${rmdup}\" > ${c1}.stats
+samtools flagstat ${c1}.sort.bam >> ${c1}.sort.bam.flagstat
 
-echo "All statistics have been printed to ${c1}.stats in the following order: aligned reads, aligned properly paired reads, and aligned reads with duplicates removed."
 echo "Job complete at \$(date)"
 
 end=\`date +%s\`
@@ -123,8 +115,6 @@ done
 ###  README  ###
 cat << readme >> ${RAD_dir}/README
     *.sort == all sorted aligned reads
-    *.sort.proper.bam == all sorted & properly paired aligned reads
-    *.sort.proper.rmdup.bam == sorted & properly paired reads with duplicates removed 
-    *sort.proper.rmdup.bam.bai == indexed alignment
-    *.stats == fmt: (all aligned reads) (all aligned & properly paired reads) (aligned, properly paired reads with duplicated removed)
+    *.sort.bam.bai == indexed alignment
+    *.flagstat == statistics for each alignment
 readme

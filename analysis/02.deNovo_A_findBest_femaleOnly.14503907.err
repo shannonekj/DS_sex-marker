@@ -1,0 +1,595 @@
+
+##  VARIABLES  ##
+# directories
+script_dir="/home/sejoslin/git_repos/DS_sex-marker/scripts"
+data_dir="/home/sejoslin/projects/sexMarker/data"
+out_dir="/group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo/femaleOnly"
+
+# other
+prefix="SexMarker_F"
+n="4"
+
+
+##  RUN  ##
+bash ${script_dir}/findBestInd.sh ${data_dir} ${out_dir} ${prefix} ${n} 
++ set -e
++ set -v
+
+
+###############
+###  SETUP  ###
+###############
+
+echo "Setting up variables"
++ echo 'Setting up variables'
+
+# external
+DATA_dir=$1     # directory where raw split fastq files are located
++ DATA_dir=/home/sejoslin/projects/sexMarker/data
+OUT_dir=$2	# directory to direct output to
++ OUT_dir=/group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo/femaleOnly
+PREFIX=$3	# Prefix of project
++ PREFIX=SexMarker_F
+N=$4		# number of individuals to select
++ N=4
+
+# internal 
+sum_file="${OUT_dir}/${PREFIX}_line_count.all"
++ sum_file=/group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo/femaleOnly/SexMarker_F_line_count.all
+
+echo "Data directory: ${DATA_dir}"
++ echo 'Data directory: /home/sejoslin/projects/sexMarker/data'
+echo "Output directory: ${OUT_dir}"
++ echo 'Output directory: /group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo/femaleOnly'
+echo "Prefix: ${PREFIX}"
++ echo 'Prefix: SexMarker_F'
+echo "N Best Individuals: ${N}"
++ echo 'N Best Individuals: 4'
+echo ""
++ echo ''
+
+###################
+###  DO THINGS  ###
+###################
+
+mkdir -p ${OUT_dir}
++ mkdir -p /group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo/femaleOnly
+touch ${sum_file}
++ touch /group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo/femaleOnly/SexMarker_F_line_count.all
+cd ${DATA_dir}
++ cd /home/sejoslin/projects/sexMarker/data
+
+for i in BMAG0??
+do
+	cd ${i}
+	echo "Entering:" ${i}
+	echo "Finding line counts in:"
+	for library in 04_split_wells.${i}.??????.sh # MAKE SURE FORMAT IS THE SAME
+	do
+		index=$(echo ${library} | cut -d. -f3)
+		echo "    ${index}"
+		cd ${index}
+		for j in *_R1.fastq
+		do
+			echo $j
+			full=$(wc -l $j)
+			line_count=$(echo ${full} | awk '{print $1}')
+			base=$(basename ${j} _R1.fastq)
+		        echo -e ${line_count}"\t"${base}"\t"${i}"\t"${index}>> ${sum_file}
+		done
+		cd ../
+	done
+	cd ../
+done
++ for i in BMAG0??
++ cd BMAG051
++ echo Entering: BMAG051
++ echo 'Finding line counts in:'
++ for library in 04_split_wells.${i}.??????.sh
+++ echo 04_split_wells.BMAG051.CCGTCC.sh
+++ cut -d. -f3
++ index=CCGTCC
++ echo '    CCGTCC'
++ cd CCGTCC
++ for j in *_R1.fastq
++ echo RX01_1_F_A07_CAGATCTG_R1.fastq
+++ wc -l RX01_1_F_A07_CAGATCTG_R1.fastq
++ full='6338612 RX01_1_F_A07_CAGATCTG_R1.fastq'
+++ echo 6338612 RX01_1_F_A07_CAGATCTG_R1.fastq
+++ awk '{print $1}'
++ line_count=6338612
+++ basename RX01_1_F_A07_CAGATCTG_R1.fastq _R1.fastq
++ base=RX01_1_F_A07_CAGATCTG
++ echo -e '6338612\tRX01_1_F_A07_CAGATCTG\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX02_1_F_B07_ACAGCAGA_R1.fastq
+++ wc -l RX02_1_F_B07_ACAGCAGA_R1.fastq
++ full='7580260 RX02_1_F_B07_ACAGCAGA_R1.fastq'
+++ echo 7580260 RX02_1_F_B07_ACAGCAGA_R1.fastq
+++ awk '{print $1}'
++ line_count=7580260
+++ basename RX02_1_F_B07_ACAGCAGA_R1.fastq _R1.fastq
++ base=RX02_1_F_B07_ACAGCAGA
++ echo -e '7580260\tRX02_1_F_B07_ACAGCAGA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX03_1_F_C07_CAAGACTA_R1.fastq
+++ wc -l RX03_1_F_C07_CAAGACTA_R1.fastq
++ full='7471308 RX03_1_F_C07_CAAGACTA_R1.fastq'
+++ echo 7471308 RX03_1_F_C07_CAAGACTA_R1.fastq
+++ awk '{print $1}'
++ line_count=7471308
+++ basename RX03_1_F_C07_CAAGACTA_R1.fastq _R1.fastq
++ base=RX03_1_F_C07_CAAGACTA
++ echo -e '7471308\tRX03_1_F_C07_CAAGACTA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX04_1_F_D07_CTCAATGA_R1.fastq
+++ wc -l RX04_1_F_D07_CTCAATGA_R1.fastq
++ full='4855412 RX04_1_F_D07_CTCAATGA_R1.fastq'
+++ echo 4855412 RX04_1_F_D07_CTCAATGA_R1.fastq
+++ awk '{print $1}'
++ line_count=4855412
+++ basename RX04_1_F_D07_CTCAATGA_R1.fastq _R1.fastq
++ base=RX04_1_F_D07_CTCAATGA
++ echo -e '4855412\tRX04_1_F_D07_CTCAATGA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX05_1_F_E07_GGTGCGAA_R1.fastq
+++ wc -l RX05_1_F_E07_GGTGCGAA_R1.fastq
++ full='4505224 RX05_1_F_E07_GGTGCGAA_R1.fastq'
+++ echo 4505224 RX05_1_F_E07_GGTGCGAA_R1.fastq
+++ awk '{print $1}'
++ line_count=4505224
+++ basename RX05_1_F_E07_GGTGCGAA_R1.fastq _R1.fastq
++ base=RX05_1_F_E07_GGTGCGAA
++ echo -e '4505224\tRX05_1_F_E07_GGTGCGAA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX06_2_M_A10_AGTACAAG_R1.fastq
+++ wc -l RX06_2_M_A10_AGTACAAG_R1.fastq
++ full='7070124 RX06_2_M_A10_AGTACAAG_R1.fastq'
+++ echo 7070124 RX06_2_M_A10_AGTACAAG_R1.fastq
+++ awk '{print $1}'
++ line_count=7070124
+++ basename RX06_2_M_A10_AGTACAAG_R1.fastq _R1.fastq
++ base=RX06_2_M_A10_AGTACAAG
++ echo -e '7070124\tRX06_2_M_A10_AGTACAAG\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX07_2_M_B10_ACGTATCA_R1.fastq
+++ wc -l RX07_2_M_B10_ACGTATCA_R1.fastq
++ full='6030020 RX07_2_M_B10_ACGTATCA_R1.fastq'
+++ echo 6030020 RX07_2_M_B10_ACGTATCA_R1.fastq
+++ awk '{print $1}'
++ line_count=6030020
+++ basename RX07_2_M_B10_ACGTATCA_R1.fastq _R1.fastq
++ base=RX07_2_M_B10_ACGTATCA
++ echo -e '6030020\tRX07_2_M_B10_ACGTATCA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX08_2_M_C10_CAGCGTTA_R1.fastq
+++ wc -l RX08_2_M_C10_CAGCGTTA_R1.fastq
++ full='3775644 RX08_2_M_C10_CAGCGTTA_R1.fastq'
+++ echo 3775644 RX08_2_M_C10_CAGCGTTA_R1.fastq
+++ awk '{print $1}'
++ line_count=3775644
+++ basename RX08_2_M_C10_CAGCGTTA_R1.fastq _R1.fastq
++ base=RX08_2_M_C10_CAGCGTTA
++ echo -e '3775644\tRX08_2_M_C10_CAGCGTTA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX20_2_M_D10_GAATCTGA_R1.fastq
+++ wc -l RX20_2_M_D10_GAATCTGA_R1.fastq
++ full='5656108 RX20_2_M_D10_GAATCTGA_R1.fastq'
+++ echo 5656108 RX20_2_M_D10_GAATCTGA_R1.fastq
+++ awk '{print $1}'
++ line_count=5656108
+++ basename RX20_2_M_D10_GAATCTGA_R1.fastq _R1.fastq
++ base=RX20_2_M_D10_GAATCTGA
++ echo -e '5656108\tRX20_2_M_D10_GAATCTGA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX22_1_F_F07_TGGTGGTA_R1.fastq
+++ wc -l RX22_1_F_F07_TGGTGGTA_R1.fastq
++ full='7243772 RX22_1_F_F07_TGGTGGTA_R1.fastq'
+++ echo 7243772 RX22_1_F_F07_TGGTGGTA_R1.fastq
+++ awk '{print $1}'
++ line_count=7243772
+++ basename RX22_1_F_F07_TGGTGGTA_R1.fastq _R1.fastq
++ base=RX22_1_F_F07_TGGTGGTA
++ echo -e '7243772\tRX22_1_F_F07_TGGTGGTA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX23_1_F_G07_AGGCTAAC_R1.fastq
+++ wc -l RX23_1_F_G07_AGGCTAAC_R1.fastq
++ full='1563844 RX23_1_F_G07_AGGCTAAC_R1.fastq'
+++ echo 1563844 RX23_1_F_G07_AGGCTAAC_R1.fastq
+++ awk '{print $1}'
++ line_count=1563844
+++ basename RX23_1_F_G07_AGGCTAAC_R1.fastq _R1.fastq
++ base=RX23_1_F_G07_AGGCTAAC
++ echo -e '1563844\tRX23_1_F_G07_AGGCTAAC\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX25_1_F_H07_CTAAGGTC_R1.fastq
+++ wc -l RX25_1_F_H07_CTAAGGTC_R1.fastq
++ full='3984516 RX25_1_F_H07_CTAAGGTC_R1.fastq'
+++ echo 3984516 RX25_1_F_H07_CTAAGGTC_R1.fastq
+++ awk '{print $1}'
++ line_count=3984516
+++ basename RX25_1_F_H07_CTAAGGTC_R1.fastq _R1.fastq
++ base=RX25_1_F_H07_CTAAGGTC
++ echo -e '3984516\tRX25_1_F_H07_CTAAGGTC\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX26_1_F_A08_ATGCCTAA_R1.fastq
+++ wc -l RX26_1_F_A08_ATGCCTAA_R1.fastq
++ full='5481524 RX26_1_F_A08_ATGCCTAA_R1.fastq'
+++ echo 5481524 RX26_1_F_A08_ATGCCTAA_R1.fastq
+++ awk '{print $1}'
++ line_count=5481524
+++ basename RX26_1_F_A08_ATGCCTAA_R1.fastq _R1.fastq
++ base=RX26_1_F_A08_ATGCCTAA
++ echo -e '5481524\tRX26_1_F_A08_ATGCCTAA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX27_1_F_B08_ACCTCCAA_R1.fastq
+++ wc -l RX27_1_F_B08_ACCTCCAA_R1.fastq
++ full='6813840 RX27_1_F_B08_ACCTCCAA_R1.fastq'
+++ echo 6813840 RX27_1_F_B08_ACCTCCAA_R1.fastq
+++ awk '{print $1}'
++ line_count=6813840
+++ basename RX27_1_F_B08_ACCTCCAA_R1.fastq _R1.fastq
++ base=RX27_1_F_B08_ACCTCCAA
++ echo -e '6813840\tRX27_1_F_B08_ACCTCCAA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX28_1_F_C08_CAATGGAA_R1.fastq
+++ wc -l RX28_1_F_C08_CAATGGAA_R1.fastq
++ full='7163112 RX28_1_F_C08_CAATGGAA_R1.fastq'
+++ echo 7163112 RX28_1_F_C08_CAATGGAA_R1.fastq
+++ awk '{print $1}'
++ line_count=7163112
+++ basename RX28_1_F_C08_CAATGGAA_R1.fastq _R1.fastq
++ base=RX28_1_F_C08_CAATGGAA
++ echo -e '7163112\tRX28_1_F_C08_CAATGGAA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX29_1_F_D08_CTGAGCCA_R1.fastq
+++ wc -l RX29_1_F_D08_CTGAGCCA_R1.fastq
++ full='9201316 RX29_1_F_D08_CTGAGCCA_R1.fastq'
+++ echo 9201316 RX29_1_F_D08_CTGAGCCA_R1.fastq
+++ awk '{print $1}'
++ line_count=9201316
+++ basename RX29_1_F_D08_CTGAGCCA_R1.fastq _R1.fastq
++ base=RX29_1_F_D08_CTGAGCCA
++ echo -e '9201316\tRX29_1_F_D08_CTGAGCCA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX31_1_F_E08_GTACGCAA_R1.fastq
+++ wc -l RX31_1_F_E08_GTACGCAA_R1.fastq
++ full='4870572 RX31_1_F_E08_GTACGCAA_R1.fastq'
+++ echo 4870572 RX31_1_F_E08_GTACGCAA_R1.fastq
+++ awk '{print $1}'
++ line_count=4870572
+++ basename RX31_1_F_E08_GTACGCAA_R1.fastq _R1.fastq
++ base=RX31_1_F_E08_GTACGCAA
++ echo -e '4870572\tRX31_1_F_E08_GTACGCAA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX32_2_M_E10_GTCTGTCA_R1.fastq
+++ wc -l RX32_2_M_E10_GTCTGTCA_R1.fastq
++ full='6771560 RX32_2_M_E10_GTCTGTCA_R1.fastq'
+++ echo 6771560 RX32_2_M_E10_GTCTGTCA_R1.fastq
+++ awk '{print $1}'
++ line_count=6771560
+++ basename RX32_2_M_E10_GTCTGTCA_R1.fastq _R1.fastq
++ base=RX32_2_M_E10_GTCTGTCA
++ echo -e '6771560\tRX32_2_M_E10_GTCTGTCA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX33_2_M_F10_AAGAGATC_R1.fastq
+++ wc -l RX33_2_M_F10_AAGAGATC_R1.fastq
++ full='1464252 RX33_2_M_F10_AAGAGATC_R1.fastq'
+++ echo 1464252 RX33_2_M_F10_AAGAGATC_R1.fastq
+++ awk '{print $1}'
++ line_count=1464252
+++ basename RX33_2_M_F10_AAGAGATC_R1.fastq _R1.fastq
++ base=RX33_2_M_F10_AAGAGATC
++ echo -e '1464252\tRX33_2_M_F10_AAGAGATC\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX34_2_M_G10_ATTGGCTC_R1.fastq
+++ wc -l RX34_2_M_G10_ATTGGCTC_R1.fastq
++ full='2717516 RX34_2_M_G10_ATTGGCTC_R1.fastq'
+++ echo 2717516 RX34_2_M_G10_ATTGGCTC_R1.fastq
+++ awk '{print $1}'
++ line_count=2717516
+++ basename RX34_2_M_G10_ATTGGCTC_R1.fastq _R1.fastq
++ base=RX34_2_M_G10_ATTGGCTC
++ echo -e '2717516\tRX34_2_M_G10_ATTGGCTC\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX35_2_M_H10_GAGTTAGC_R1.fastq
+++ wc -l RX35_2_M_H10_GAGTTAGC_R1.fastq
++ full='2746548 RX35_2_M_H10_GAGTTAGC_R1.fastq'
+++ echo 2746548 RX35_2_M_H10_GAGTTAGC_R1.fastq
+++ awk '{print $1}'
++ line_count=2746548
+++ basename RX35_2_M_H10_GAGTTAGC_R1.fastq _R1.fastq
++ base=RX35_2_M_H10_GAGTTAGC
++ echo -e '2746548\tRX35_2_M_H10_GAGTTAGC\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX36_2_M_A11_CATCAAGT_R1.fastq
+++ wc -l RX36_2_M_A11_CATCAAGT_R1.fastq
++ full='4137520 RX36_2_M_A11_CATCAAGT_R1.fastq'
+++ echo 4137520 RX36_2_M_A11_CATCAAGT_R1.fastq
+++ awk '{print $1}'
++ line_count=4137520
+++ basename RX36_2_M_A11_CATCAAGT_R1.fastq _R1.fastq
++ base=RX36_2_M_A11_CATCAAGT
++ echo -e '4137520\tRX36_2_M_A11_CATCAAGT\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX37_2_M_B11_ACTATGCA_R1.fastq
+++ wc -l RX37_2_M_B11_ACTATGCA_R1.fastq
++ full='7952188 RX37_2_M_B11_ACTATGCA_R1.fastq'
+++ echo 7952188 RX37_2_M_B11_ACTATGCA_R1.fastq
+++ awk '{print $1}'
++ line_count=7952188
+++ basename RX37_2_M_B11_ACTATGCA_R1.fastq _R1.fastq
++ base=RX37_2_M_B11_ACTATGCA
++ echo -e '7952188\tRX37_2_M_B11_ACTATGCA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX38_2_M_C11_CATACCAA_R1.fastq
+++ wc -l RX38_2_M_C11_CATACCAA_R1.fastq
++ full='4953560 RX38_2_M_C11_CATACCAA_R1.fastq'
+++ echo 4953560 RX38_2_M_C11_CATACCAA_R1.fastq
+++ awk '{print $1}'
++ line_count=4953560
+++ basename RX38_2_M_C11_CATACCAA_R1.fastq _R1.fastq
++ base=RX38_2_M_C11_CATACCAA
++ echo -e '4953560\tRX38_2_M_C11_CATACCAA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX39_2_M_D11_GACTAGTA_R1.fastq
+++ wc -l RX39_2_M_D11_GACTAGTA_R1.fastq
++ full='6670052 RX39_2_M_D11_GACTAGTA_R1.fastq'
+++ echo 6670052 RX39_2_M_D11_GACTAGTA_R1.fastq
+++ awk '{print $1}'
++ line_count=6670052
+++ basename RX39_2_M_D11_GACTAGTA_R1.fastq _R1.fastq
++ base=RX39_2_M_D11_GACTAGTA
++ echo -e '6670052\tRX39_2_M_D11_GACTAGTA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX40_2_M_E11_GTGTTCTA_R1.fastq
+++ wc -l RX40_2_M_E11_GTGTTCTA_R1.fastq
++ full='4477572 RX40_2_M_E11_GTGTTCTA_R1.fastq'
+++ echo 4477572 RX40_2_M_E11_GTGTTCTA_R1.fastq
+++ awk '{print $1}'
++ line_count=4477572
+++ basename RX40_2_M_E11_GTGTTCTA_R1.fastq _R1.fastq
++ base=RX40_2_M_E11_GTGTTCTA
++ echo -e '4477572\tRX40_2_M_E11_GTGTTCTA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX41_2_M_F11_AAGGACAC_R1.fastq
+++ wc -l RX41_2_M_F11_AAGGACAC_R1.fastq
++ full='169000 RX41_2_M_F11_AAGGACAC_R1.fastq'
+++ echo 169000 RX41_2_M_F11_AAGGACAC_R1.fastq
+++ awk '{print $1}'
++ line_count=169000
+++ basename RX41_2_M_F11_AAGGACAC_R1.fastq _R1.fastq
++ base=RX41_2_M_F11_AAGGACAC
++ echo -e '169000\tRX41_2_M_F11_AAGGACAC\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX43_2_M_G11_CAAGGAGC_R1.fastq
+++ wc -l RX43_2_M_G11_CAAGGAGC_R1.fastq
++ full='2684408 RX43_2_M_G11_CAAGGAGC_R1.fastq'
+++ echo 2684408 RX43_2_M_G11_CAAGGAGC_R1.fastq
+++ awk '{print $1}'
++ line_count=2684408
+++ basename RX43_2_M_G11_CAAGGAGC_R1.fastq _R1.fastq
++ base=RX43_2_M_G11_CAAGGAGC
++ echo -e '2684408\tRX43_2_M_G11_CAAGGAGC\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX46_1_F_F08_TTCACGCA_R1.fastq
+++ wc -l RX46_1_F_F08_TTCACGCA_R1.fastq
++ full='7741348 RX46_1_F_F08_TTCACGCA_R1.fastq'
+++ echo 7741348 RX46_1_F_F08_TTCACGCA_R1.fastq
+++ awk '{print $1}'
++ line_count=7741348
+++ basename RX46_1_F_F08_TTCACGCA_R1.fastq _R1.fastq
++ base=RX46_1_F_F08_TTCACGCA
++ echo -e '7741348\tRX46_1_F_F08_TTCACGCA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX47_1_F_G08_ATAGCGAC_R1.fastq
+++ wc -l RX47_1_F_G08_ATAGCGAC_R1.fastq
++ full='528972 RX47_1_F_G08_ATAGCGAC_R1.fastq'
+++ echo 528972 RX47_1_F_G08_ATAGCGAC_R1.fastq
+++ awk '{print $1}'
++ line_count=528972
+++ basename RX47_1_F_G08_ATAGCGAC_R1.fastq _R1.fastq
++ base=RX47_1_F_G08_ATAGCGAC
++ echo -e '528972\tRX47_1_F_G08_ATAGCGAC\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX48_1_F_H08_GAACAGGC_R1.fastq
+++ wc -l RX48_1_F_H08_GAACAGGC_R1.fastq
++ full='3463908 RX48_1_F_H08_GAACAGGC_R1.fastq'
+++ echo 3463908 RX48_1_F_H08_GAACAGGC_R1.fastq
+++ awk '{print $1}'
++ line_count=3463908
+++ basename RX48_1_F_H08_GAACAGGC_R1.fastq _R1.fastq
++ base=RX48_1_F_H08_GAACAGGC
++ echo -e '3463908\tRX48_1_F_H08_GAACAGGC\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX49_1_F_A09_AACGAACG_R1.fastq
+++ wc -l RX49_1_F_A09_AACGAACG_R1.fastq
++ full='5244256 RX49_1_F_A09_AACGAACG_R1.fastq'
+++ echo 5244256 RX49_1_F_A09_AACGAACG_R1.fastq
+++ awk '{print $1}'
++ line_count=5244256
+++ basename RX49_1_F_A09_AACGAACG_R1.fastq _R1.fastq
++ base=RX49_1_F_A09_AACGAACG
++ echo -e '5244256\tRX49_1_F_A09_AACGAACG\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX51_1_F_B09_ACGCTCGA_R1.fastq
+++ wc -l RX51_1_F_B09_ACGCTCGA_R1.fastq
++ full='3730064 RX51_1_F_B09_ACGCTCGA_R1.fastq'
+++ echo 3730064 RX51_1_F_B09_ACGCTCGA_R1.fastq
+++ awk '{print $1}'
++ line_count=3730064
+++ basename RX51_1_F_B09_ACGCTCGA_R1.fastq _R1.fastq
++ base=RX51_1_F_B09_ACGCTCGA
++ echo -e '3730064\tRX51_1_F_B09_ACGCTCGA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX52_1_F_C09_CACTTCGA_R1.fastq
+++ wc -l RX52_1_F_C09_CACTTCGA_R1.fastq
++ full='4233124 RX52_1_F_C09_CACTTCGA_R1.fastq'
+++ echo 4233124 RX52_1_F_C09_CACTTCGA_R1.fastq
+++ awk '{print $1}'
++ line_count=4233124
+++ basename RX52_1_F_C09_CACTTCGA_R1.fastq _R1.fastq
++ base=RX52_1_F_C09_CACTTCGA
++ echo -e '4233124\tRX52_1_F_C09_CACTTCGA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX54_1_F_D09_CTGGCATA_R1.fastq
+++ wc -l RX54_1_F_D09_CTGGCATA_R1.fastq
++ full='3250832 RX54_1_F_D09_CTGGCATA_R1.fastq'
+++ echo 3250832 RX54_1_F_D09_CTGGCATA_R1.fastq
+++ awk '{print $1}'
++ line_count=3250832
+++ basename RX54_1_F_D09_CTGGCATA_R1.fastq _R1.fastq
++ base=RX54_1_F_D09_CTGGCATA
++ echo -e '3250832\tRX54_1_F_D09_CTGGCATA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX55_1_F_E09_GTCGTAGA_R1.fastq
+++ wc -l RX55_1_F_E09_GTCGTAGA_R1.fastq
++ full='2124852 RX55_1_F_E09_GTCGTAGA_R1.fastq'
+++ echo 2124852 RX55_1_F_E09_GTCGTAGA_R1.fastq
+++ awk '{print $1}'
++ line_count=2124852
+++ basename RX55_1_F_E09_GTCGTAGA_R1.fastq _R1.fastq
++ base=RX55_1_F_E09_GTCGTAGA
++ echo -e '2124852\tRX55_1_F_E09_GTCGTAGA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX56_1_F_F09_ACACGAGA_R1.fastq
+++ wc -l RX56_1_F_F09_ACACGAGA_R1.fastq
++ full='3789020 RX56_1_F_F09_ACACGAGA_R1.fastq'
+++ echo 3789020 RX56_1_F_F09_ACACGAGA_R1.fastq
+++ awk '{print $1}'
++ line_count=3789020
+++ basename RX56_1_F_F09_ACACGAGA_R1.fastq _R1.fastq
++ base=RX56_1_F_F09_ACACGAGA
++ echo -e '3789020\tRX56_1_F_F09_ACACGAGA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX59_2_M_H11_GATGAATC_R1.fastq
+++ wc -l RX59_2_M_H11_GATGAATC_R1.fastq
++ full='542648 RX59_2_M_H11_GATGAATC_R1.fastq'
+++ echo 542648 RX59_2_M_H11_GATGAATC_R1.fastq
+++ awk '{print $1}'
++ line_count=542648
+++ basename RX59_2_M_H11_GATGAATC_R1.fastq _R1.fastq
++ base=RX59_2_M_H11_GATGAATC
++ echo -e '542648\tRX59_2_M_H11_GATGAATC\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX61_2_M_A12_AGTGGTCA_R1.fastq
+++ wc -l RX61_2_M_A12_AGTGGTCA_R1.fastq
++ full='3013264 RX61_2_M_A12_AGTGGTCA_R1.fastq'
+++ echo 3013264 RX61_2_M_A12_AGTGGTCA_R1.fastq
+++ awk '{print $1}'
++ line_count=3013264
+++ basename RX61_2_M_A12_AGTGGTCA_R1.fastq _R1.fastq
++ base=RX61_2_M_A12_AGTGGTCA
++ echo -e '3013264\tRX61_2_M_A12_AGTGGTCA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX62_2_M_B12_AGAGTCAA_R1.fastq
+++ wc -l RX62_2_M_B12_AGAGTCAA_R1.fastq
++ full='4711256 RX62_2_M_B12_AGAGTCAA_R1.fastq'
+++ echo 4711256 RX62_2_M_B12_AGAGTCAA_R1.fastq
+++ awk '{print $1}'
++ line_count=4711256
+++ basename RX62_2_M_B12_AGAGTCAA_R1.fastq _R1.fastq
++ base=RX62_2_M_B12_AGAGTCAA
++ echo -e '4711256\tRX62_2_M_B12_AGAGTCAA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX64_2_M_C12_CCAGTTCA_R1.fastq
+++ wc -l RX64_2_M_C12_CCAGTTCA_R1.fastq
++ full='3241100 RX64_2_M_C12_CCAGTTCA_R1.fastq'
+++ echo 3241100 RX64_2_M_C12_CCAGTTCA_R1.fastq
+++ awk '{print $1}'
++ line_count=3241100
+++ basename RX64_2_M_C12_CCAGTTCA_R1.fastq _R1.fastq
++ base=RX64_2_M_C12_CCAGTTCA
++ echo -e '3241100\tRX64_2_M_C12_CCAGTTCA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX65_2_M_D12_GAGCTGAA_R1.fastq
+++ wc -l RX65_2_M_D12_GAGCTGAA_R1.fastq
++ full='3991208 RX65_2_M_D12_GAGCTGAA_R1.fastq'
+++ echo 3991208 RX65_2_M_D12_GAGCTGAA_R1.fastq
+++ awk '{print $1}'
++ line_count=3991208
+++ basename RX65_2_M_D12_GAGCTGAA_R1.fastq _R1.fastq
++ base=RX65_2_M_D12_GAGCTGAA
++ echo -e '3991208\tRX65_2_M_D12_GAGCTGAA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX66_2_M_E12_TAGGATGA_R1.fastq
+++ wc -l RX66_2_M_E12_TAGGATGA_R1.fastq
++ full='4293172 RX66_2_M_E12_TAGGATGA_R1.fastq'
+++ echo 4293172 RX66_2_M_E12_TAGGATGA_R1.fastq
+++ awk '{print $1}'
++ line_count=4293172
+++ basename RX66_2_M_E12_TAGGATGA_R1.fastq _R1.fastq
++ base=RX66_2_M_E12_TAGGATGA
++ echo -e '4293172\tRX66_2_M_E12_TAGGATGA\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX67_2_M_F12_AATCCGTC_R1.fastq
+++ wc -l RX67_2_M_F12_AATCCGTC_R1.fastq
++ full='1495776 RX67_2_M_F12_AATCCGTC_R1.fastq'
+++ echo 1495776 RX67_2_M_F12_AATCCGTC_R1.fastq
+++ awk '{print $1}'
++ line_count=1495776
+++ basename RX67_2_M_F12_AATCCGTC_R1.fastq _R1.fastq
++ base=RX67_2_M_F12_AATCCGTC
++ echo -e '1495776\tRX67_2_M_F12_AATCCGTC\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX68_2_M_G12_CACCTTAC_R1.fastq
+++ wc -l RX68_2_M_G12_CACCTTAC_R1.fastq
++ full='459244 RX68_2_M_G12_CACCTTAC_R1.fastq'
+++ echo 459244 RX68_2_M_G12_CACCTTAC_R1.fastq
+++ awk '{print $1}'
++ line_count=459244
+++ basename RX68_2_M_G12_CACCTTAC_R1.fastq _R1.fastq
++ base=RX68_2_M_G12_CACCTTAC
++ echo -e '459244\tRX68_2_M_G12_CACCTTAC\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX70_2_M_H12_GCCAAGAC_R1.fastq
+++ wc -l RX70_2_M_H12_GCCAAGAC_R1.fastq
++ full='1090968 RX70_2_M_H12_GCCAAGAC_R1.fastq'
+++ echo 1090968 RX70_2_M_H12_GCCAAGAC_R1.fastq
+++ awk '{print $1}'
++ line_count=1090968
+++ basename RX70_2_M_H12_GCCAAGAC_R1.fastq _R1.fastq
++ base=RX70_2_M_H12_GCCAAGAC
++ echo -e '1090968\tRX70_2_M_H12_GCCAAGAC\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX71_1_F_G09_ACGACAAG_R1.fastq
+++ wc -l RX71_1_F_G09_ACGACAAG_R1.fastq
++ full='3840684 RX71_1_F_G09_ACGACAAG_R1.fastq'
+++ echo 3840684 RX71_1_F_G09_ACGACAAG_R1.fastq
+++ awk '{print $1}'
++ line_count=3840684
+++ basename RX71_1_F_G09_ACGACAAG_R1.fastq _R1.fastq
++ base=RX71_1_F_G09_ACGACAAG
++ echo -e '3840684\tRX71_1_F_G09_ACGACAAG\tBMAG051\tCCGTCC'
++ for j in *_R1.fastq
++ echo RX73_1_F_H09_GACAGTGC_R1.fastq
+++ wc -l RX73_1_F_H09_GACAGTGC_R1.fastq
++ full='1656452 RX73_1_F_H09_GACAGTGC_R1.fastq'
+++ echo 1656452 RX73_1_F_H09_GACAGTGC_R1.fastq
+++ awk '{print $1}'
++ line_count=1656452
+++ basename RX73_1_F_H09_GACAGTGC_R1.fastq _R1.fastq
++ base=RX73_1_F_H09_GACAGTGC
++ echo -e '1656452\tRX73_1_F_H09_GACAGTGC\tBMAG051\tCCGTCC'
++ cd ../
++ cd ../
+
+sort -n -r ${sum_file} > ${sum_file}.sorted
++ sort -n -r /group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo/femaleOnly/SexMarker_F_line_count.all
+
+
+# grab the best
+n=$(( $N + 1 ))
++ n=5
+head -${n} ${sum_file}.sorted >> ${sum_file}.best
++ head -5 /group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo/femaleOnly/SexMarker_F_line_count.all.sorted
+sed -i '1d' ${sum_file}.best
++ sed -i 1d /group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo/femaleOnly/SexMarker_F_line_count.all.best
+
+
+
+
+# make best file with only females
+cd ${out_dir}
+grep _F_ SexMarker_F_line_count.all.sorted >> SexMarker_F_line_count.maleOnly.sorted
+head -${n} SexMarker_F_line_count.maleOnly.sorted >> SexMarker_F_line_count.maleOnly.best
