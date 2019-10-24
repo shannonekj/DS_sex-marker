@@ -63,3 +63,19 @@ do
 	echo -e "${locus}\t${z}\t${b}" >> ${proj}.1.counts
 	x=$(( $x + 1 ))
 done
+slurmstepd: error: _is_a_lwp: open() /proc/50759/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: open() /proc/61152/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: open() /proc/4989/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: open() /proc/58755/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: open() /proc/9049/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: open() /proc/21525/status failed: No such file or directory
+echo ""
+
+## Sort
+echo "Sorting depth counts"
+sort -n -k2,2 ${proj}.1.counts >> ${proj}.1.counts.sorted
+echo "    Complete!"
+
+end=`date +%s`
+runtime=$((end-start))
+echo "Runtime : "${runtime}

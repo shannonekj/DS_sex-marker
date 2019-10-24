@@ -1,0 +1,94 @@
+
+hostname
+start=`date +%s`
+echo "My SLURM_JOB_ID: $SLURM_JOB_ID"
+
+
+###############
+###  SETUP  ###
+###############
+proj="DS_sex-marker"
+
+# directories
+ana_dir="/group/millermrgrp2/shannon/projects/${proj}/03-depth_Analysis/femaleRef"
+
+
+
+###################
+###  DO THINGS  ###
+###################
+# Grab each of the depths for females and males
+cd ${ana_dir}
+echo "Counting depths in male and females"
+echo ""
+x=1
+n=$(wc -l ${proj}.depth | awk '{print $1}')
+while [ $x -le $n ]
+do
+	echo "Processing line ${x}/${n}."
+	z=0
+	b=0
+	locus=$(sed -n "${x}p" ${proj}.depth | awk '{print $1}')
+	
+	for i in $(seq 3 26)
+	do
+		y=$(sed -n "${x}p" ${proj}.depth | awk "{print \$${i}}")
+		if [ $y -gt 0 ]
+		then
+			z=$(( $z + 1 ))
+		elif [ $y -eq 0 ]
+		then
+			z=$z
+		else
+			echo "Read ${locus} ${y} doesnt make sense."
+		fi
+	done
+	echo "    Females counts complete!"
+
+	for j in $(seq 27 50)
+	do
+		a=$(sed -n "${x}p" ${proj}.depth | awk "{print \$${j}}")
+		if [ $a -gt 0 ]
+		then
+			b=$(( $b + 1 ))
+		elif [ $a -eq 0 ]
+		then
+			b=$b
+		else
+			echo "Read ${locus} ${b} doesn't make sense."
+		fi
+	done
+	echo "    Male counts complete!"
+
+	echo -e "${locus}\t${z}\t${b}" >> ${proj}.1.counts
+	x=$(( $x + 1 ))
+done
+slurmstepd: error: _is_a_lwp: open() /proc/4027/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: open() /proc/30653/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: open() /proc/3366/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: open() /proc/10867/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: open() /proc/19239/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: open() /proc/24208/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: open() /proc/7123/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: 1 read() attempts on /proc/9585/status failed: No such process
+slurmstepd: error: _is_a_lwp: open() /proc/20135/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: open() /proc/9571/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: 1 read() attempts on /proc/18452/status failed: No such process
+slurmstepd: error: _is_a_lwp: open() /proc/4519/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: open() /proc/20385/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: open() /proc/19694/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: open() /proc/25450/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: open() /proc/17566/status failed: No such file or directory
+slurmstepd: error: _is_a_lwp: open() /proc/25854/status failed: No such file or directory
+echo ""
+
+## Sort
+echo "Sorting depth counts"
+sort -n -k3,3 ${proj}.1.counts >> ${proj}.1.counts.sorted
+echo "    Complete!"
+
+
+
+end=`date +%s`
+runtime=$((end-start))
+echo "Runtime : "${runtime}
