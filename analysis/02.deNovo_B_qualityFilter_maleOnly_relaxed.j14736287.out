@@ -1,0 +1,70 @@
+==========================================
+SLURM_JOB_ID = 14736287
+SLURM_NODELIST = c10-97
+==========================================
+Setting up variables
+Data directory: /home/sejoslin/projects/sexMarker/data
+Output directory: /group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo_relaxed/maleOnly
+Code directory: /home/sejoslin/scripts
+Prefix: SexMarker_M_relaxed
+Best Individual File: /group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo_relaxed/maleOnly/SexMarker_M_relaxed_line_count.maleOnly.best
+
+Navigating to /group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo_relaxed/maleOnly
+Creating sym links for 4 individuals
+    Done!
+
+Starting RX06_2_M_A10_AGTACAAG_R1.fastq 10/29/19 10:44:07
+    Quality filtering : RX06_2_M_A10_AGTACAAG
+@J00113:279:HG3MHBBXX:5:1101:2331:2088 1:N:0:0
+TATTGGATCCCCCTCTTTGGCTTCTTGTTAAAGCTACGCAGAAGAAGAGAGGTGTGGAGTCGTGTAAGAGACGACAGAGC
+    Shrinking : RX06_2_M_A10_AGTACAAG
+>RX06_2_M_A10_AGTACAAG;1;7304
+TTACAATATTCAACGGCGCCAGGCGCGGGGTTTTCTTGGAGATGACCCGCGACAACTTTGCCTCCGCCGAGCGCCTGGAG
+    Create histogram for data in : RX06_2_M_A10_AGTACAAG
+Finished with RX06_2_M_A10_AGTACAAG_R1.fastq 10/29/19 10:45:29
+Starting RX32_2_M_E10_GTCTGTCA_R1.fastq 10/29/19 10:45:29
+    Quality filtering : RX32_2_M_E10_GTCTGTCA
+@J00113:279:HG3MHBBXX:5:1101:25510:2088 1:N:0:0
+CACACTAGATGTCAGTGTTGCATTCCTGTAAGAGACAAAGTAAAGGACGGAAGCTTCCCTACACCTATAGGTGACTGACT
+    Shrinking : RX32_2_M_E10_GTCTGTCA
+>RX32_2_M_E10_GTCTGTCA;1;4505
+TTACAATATTCAACGGCGCCAGGCGCGGGGTTTTCTTGGAGATGACCCGCGACAACTTTGCCTCCGCCGAGCGCCTGGAG
+    Create histogram for data in : RX32_2_M_E10_GTCTGTCA
+Finished with RX32_2_M_E10_GTCTGTCA_R1.fastq 10/29/19 10:46:55
+Starting RX37_2_M_B11_ACTATGCA_R1.fastq 10/29/19 10:46:55
+    Quality filtering : RX37_2_M_B11_ACTATGCA
+@J00113:279:HG3MHBBXX:5:1101:31121:2070 1:N:0:0
+ATTTGTCCACCAACTTCAGACACACACAGTCCAGCTACCTGAAACGTAGGAGTTCCTAGGAACGACAAGTGAAATTTCAC
+    Shrinking : RX37_2_M_B11_ACTATGCA
+>RX37_2_M_B11_ACTATGCA;1;5990
+TTACAATATTCAACGGCGCCAGGCGCGGGGTTTTCTTGGAGATGACCCGCGACAACTTTGCCTCCGCCGAGCGCCTGGAG
+    Create histogram for data in : RX37_2_M_B11_ACTATGCA
+Finished with RX37_2_M_B11_ACTATGCA_R1.fastq 10/29/19 10:48:29
+Starting RX39_2_M_D11_GACTAGTA_R1.fastq 10/29/19 10:48:29
+    Quality filtering : RX39_2_M_D11_GACTAGTA
+@J00113:279:HG3MHBBXX:5:1101:17716:2088 1:N:0:0
+ACGGCAGCACCTCGCAGGGTCCGCCCGACCGCCTCTGTCACCATGACAACACCTCACCGGACCTCGATGCTGGCGGGGTC
+    Shrinking : RX39_2_M_D11_GACTAGTA
+>RX39_2_M_D11_GACTAGTA;1;6326
+TTACAATATTCAACGGCGCCAGGCGCGGGGTTTTCTTGGAGATGACCCGCGACAACTTTGCCTCCGCCGAGCGCCTGGAG
+    Create histogram for data in : RX39_2_M_D11_GACTAGTA
+Finished with RX39_2_M_D11_GACTAGTA_R1.fastq 10/29/19 10:49:52
+Name                : qFILTmale
+User                : sejoslin
+Partition           : high
+Nodes               : c10-97
+Cores               : 20
+GPUs                : 0
+State               : COMPLETED
+Submit              : 2019-10-29T10:43:43
+Start               : 2019-10-29T10:43:49
+End                 : 2019-10-29T10:49:37
+Reserved walltime   : 02:00:00
+Used walltime       : 00:05:48
+Used CPU time       : 00:05:44
+% User (Computation): 98.73%
+% System (I/O)      :  1.27%
+Mem reserved        : 2000M/core
+Max Mem used        : 1.31M (c10-97)
+Max Disk Write      : 0.00  (c10-97)
+Max Disk Read       : 532.48K (c10-97)

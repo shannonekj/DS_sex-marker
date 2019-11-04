@@ -1,0 +1,70 @@
+==========================================
+SLURM_JOB_ID = 14736282
+SLURM_NODELIST = c10-16
+==========================================
+Setting up variables
+Data directory: /home/sejoslin/projects/sexMarker/data
+Output directory: /group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo_relaxed/femaleOnly
+Code directory: /home/sejoslin/scripts
+Prefix: SexMarker_F_relaxed
+Best Individual File: /group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo_relaxed/femaleOnly/SexMarker_F_relaxed_line_count.maleOnly.best
+
+Navigating to /group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo_relaxed/femaleOnly
+Creating sym links for 4 individuals
+    Done!
+
+Starting RX02_1_F_B07_ACAGCAGA_R1.fastq 10/29/19 10:42:21
+    Quality filtering : RX02_1_F_B07_ACAGCAGA
+@J00113:279:HG3MHBBXX:5:1101:2453:2088 1:N:0:0
+TCAGTGCACCCTGCATCTCAGTCACTAACTGAGACACATCGAGAGGAAGAAGTTGAAATAAGTGTAACAAATGCAAATAC
+    Shrinking : RX02_1_F_B07_ACAGCAGA
+>RX02_1_F_B07_ACAGCAGA;1;10200
+TTACAATATTCAACGGCGCCAGGCGCGGGGTTTTCTTGGAGATGACCCGCGACAACTTTGCCTCCGCCGAGCGCCTGGAG
+    Create histogram for data in : RX02_1_F_B07_ACAGCAGA
+Finished with RX02_1_F_B07_ACAGCAGA_R1.fastq 10/29/19 10:43:07
+Starting RX03_1_F_C07_CAAGACTA_R1.fastq 10/29/19 10:43:07
+    Quality filtering : RX03_1_F_C07_CAAGACTA
+@J00113:279:HG3MHBBXX:5:1101:21471:2088 1:N:0:0
+ACAGACATCAAGGCTCCCTCTCACTGGGTCAGACCCCATTCAGTGTAGACCTGCCTGGTCCTGGTCCTGGTTGCACTCTA
+    Shrinking : RX03_1_F_C07_CAAGACTA
+>RX03_1_F_C07_CAAGACTA;1;11889
+TTACAATATTCAACGGCGCCAGGCGCGGGGTTTTCTTGGAGATGACCCGCGACAACTTTGCCTCCGCCGAGCGCCTGGAG
+    Create histogram for data in : RX03_1_F_C07_CAAGACTA
+Finished with RX03_1_F_C07_CAAGACTA_R1.fastq 10/29/19 10:43:52
+Starting RX29_1_F_D08_CTGAGCCA_R1.fastq 10/29/19 10:43:52
+    Quality filtering : RX29_1_F_D08_CTGAGCCA
+@J00113:279:HG3MHBBXX:5:1101:4117:2088 1:N:0:0
+TTTTCTGTGGTTACGGGACCTCAGTTAGTGTGGGAATAGAGGCTGACATCCAGGGAAGTGTTTTATTCAGATTACCAGGG
+    Shrinking : RX29_1_F_D08_CTGAGCCA
+>RX29_1_F_D08_CTGAGCCA;1;14080
+TTACAATATTCAACGGCGCCAGGCGCGGGGTTTTCTTGGAGATGACCCGCGACAACTTTGCCTCCGCCGAGCGCCTGGAG
+    Create histogram for data in : RX29_1_F_D08_CTGAGCCA
+Finished with RX29_1_F_D08_CTGAGCCA_R1.fastq 10/29/19 10:44:46
+Starting RX46_1_F_F08_TTCACGCA_R1.fastq 10/29/19 10:44:46
+    Quality filtering : RX46_1_F_F08_TTCACGCA
+@J00113:279:HG3MHBBXX:5:1101:6969:2105 1:N:0:0
+TATGGCTGTTCTGATATCTGCAATTGATTTAGCTAGTGTTGCTGTTGTTGCTAAATTCGAGGGAGCAGACCTTCAGCTCC
+    Shrinking : RX46_1_F_F08_TTCACGCA
+>RX46_1_F_F08_TTCACGCA;1;4371
+TTACAATATTCAACGGCGCCAGGCGCGGGGTTTTCTTGGAGATGACCCGCGACAACTTTGCCTCCGCCGAGCGCCTGGAG
+    Create histogram for data in : RX46_1_F_F08_TTCACGCA
+Finished with RX46_1_F_F08_TTCACGCA_R1.fastq 10/29/19 10:45:33
+Name                : qualFILT
+User                : sejoslin
+Partition           : high
+Nodes               : c10-16
+Cores               : 20
+GPUs                : 0
+State               : COMPLETED
+Submit              : 2019-10-29T10:42:09
+Start               : 2019-10-29T10:42:17
+End                 : 2019-10-29T10:45:32
+Reserved walltime   : 02:00:00
+Used walltime       : 00:03:15
+Used CPU time       : 00:03:11
+% User (Computation): 98.85%
+% System (I/O)      :  1.15%
+Mem reserved        : 2000M/core
+Max Mem used        : 23.11M (c10-16)
+Max Disk Write      : 0.00  (c10-16)
+Max Disk Read       : 532.48K (c10-16)

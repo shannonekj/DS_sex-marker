@@ -1,0 +1,104 @@
+
+##  VARIABLES  ##
+# directories
+code_dir="/home/sejoslin/scripts"
+script_dir="/home/sejoslin/git_repos/DS_sex-marker/scripts"
+data_dir="/home/sejoslin/projects/sexMarker/data"
+out_dir="/group/millermrgrp2/shannon/projects/DS_sex-marker/01-RAD_deNovo_relaxed/maleOnly"
+
+# other
+prefix="SexMarker_M_relaxed"
+best_file="${out_dir}/${prefix}_line_count.maleOnly.best"
+
+
+##  RUN  ##
+bash ${script_dir}/RAD_deNovo_qualityFilter.sh ${data_dir} ${out_dir} ${code_dir} ${prefix} ${best_file}
+
+###############
+###  SETUP  ###
+###############
+
+echo "Setting up variables"
+
+# external
+DATA_dir=$1     # directory where raw split fastq files are located
+OUT_dir=$2      # directory to direct output to
+CODE_dir=$3	# path to perl scripts
+PREFIX=$4       # prefix of project
+BEST_file=$5	# file with four columns ( line_count | file_name | lane_ID | library_ID )
+
+# internal
+sum_file="${OUT_dir}/${PREFIX}_line_count.all"
+
+echo "Data directory: ${DATA_dir}"
+echo "Output directory: ${OUT_dir}"
+echo "Code directory: ${CODE_dir}"
+echo "Prefix: ${PREFIX}"
+echo "Best Individual File: ${BEST_file}"
+echo ""
+
+
+
+###################
+###  DO THINGS  ###
+###################
+## 
+
+##  Link to 'best' individuals' fastq files
+F1="${BEST_file}"
+n=$(wc -l ${F1} | awk '{print $1}')
+
+echo "Navigating to ${OUT_dir}"
+cd ${OUT_dir}
+
+echo "Creating sym links for ${n} individuals"
+x=1
+while [ $x -le $n ]
+do
+	string="sed -n ${x}p ${F1}"
+	str=$(${string})
+	var=$(echo ${str} | awk -F" " '{print $2}')
+	batch=$(echo ${str} | awk -F" " '{print $3}')
+	bar=$(echo ${str} | awk -F" " '{print $4}')
+	set -- ${var}
+	ln -s ${DATA_dir}/${batch}/${bar}/${var}_R1.fastq ${var}_R1.fastq
+	x=$(( $x + 1 ))
+done
+echo "    Done!"
+echo ""
+
+##  filter, hash and view occurencesVSsequences
+cd ${OUT_dir}
+mkdir -p L80P80 hashes sum_stats raw
+
+for i in *_R1.fastq
+do
+	qual=$(basename $i _R1.fastq)
+	echo "Starting ${i} $(date +%D' '%T)"
+	echo "    Quality filtering : ${qual}"
+	perl ${CODE_dir}/QualityFilter.pl ${i} > ${qual}_L80P80.fastq
+	head -2 ${qual}_L80P80.fastq
+
+	echo "    Shrinking : ${qual}"
+	perl ${CODE_dir}/HashSeqs.pl ${qual}_L80P80.fastq ${qual}  > ${qual}_L80P80.hash
+	head -2 ${qual}_L80P80.hash
+
+	echo "    Create histogram for data in : ${qual}"
+	perl ${CODE_dir}/PrintHashHisto.pl ${qual}_L80P80.hash > ${qual}_L80P80.txt
+
+	echo "Finished with ${i} $(date +%D' '%T)"
+done
+
+## CLEAN FILES
+mv *_L80P80.fastq L80P80/.
+mv *.hash hashes/.
+mv *_L80P80.txt sum_stats/.
+mv *.fastq raw/.
+
+cd hashes
+cat *.hash >> ../${PREFIX}.fasta
+
+
+
+
+
