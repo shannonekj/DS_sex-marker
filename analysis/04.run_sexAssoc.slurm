@@ -2,8 +2,8 @@
 #SBATCH --mail-user=sejoslin@ucdavis.edu
 #SBATCH --mail-type=ALL
 #SBATCH -J sexAssoc
-#SBATCH -e 04.run_sexAssoc.j%j.err
-#SBATCH -o 04.run_sexAssoc.j%j.out
+#SBATCH -e slurm/04.run_sexAssoc.j%j.err
+#SBATCH -o slurm/04.run_sexAssoc.j%j.out
 #SBATCH -c 20
 #SBATCH -p high
 #SBATCH --time=16:00:00

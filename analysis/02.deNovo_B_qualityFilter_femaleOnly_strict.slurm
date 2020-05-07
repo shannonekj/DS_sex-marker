@@ -2,8 +2,8 @@
 #SBATCH --mail-user=sejoslin@ucdavis.edu
 #SBATCH --mail-type=ALL
 #SBATCH -J qualFILT
-#SBATCH -e 02.deNovo_B_qualityFilter_femaleOnly.j%j.err
-#SBATCH -o 02.deNovo_B_qualityFilter_femaleOnly.j%j.out
+#SBATCH -e slurm/02.deNovo_B_qualityFilter_femaleOnly.j%j.err
+#SBATCH -o slurm/02.deNovo_B_qualityFilter_femaleOnly.j%j.out
 #SBATCH -c 20
 #SBATCH -p high
 #SBATCH --time=02:00:00

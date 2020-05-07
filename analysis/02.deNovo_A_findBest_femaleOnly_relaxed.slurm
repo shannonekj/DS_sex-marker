@@ -2,8 +2,8 @@
 #BATCH --mail-user=sejoslin@ucdavis.edu
 #SBATCH --mail-type=ALL
 #SBATCH -J findBEST
-#SBATCH -e 02.deNovo_A_findBest_femaleOnly_relaxed.%j.err
-#SBATCH -o 02.deNovo_A_findBest_femaleOnly_relaxed.%j.out
+#SBATCH -e slurm/02.deNovo_A_findBest_femaleOnly_relaxed.%j.err
+#SBATCH -o slurm/02.deNovo_A_findBest_femaleOnly_relaxed.%j.out
 #SBATCH -c 2
 #SBATCH -p high
 #SBATCH --time=00:11:11

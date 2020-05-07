@@ -2,8 +2,8 @@
 #SBATCH --mail-user=sejoslin@ucdavis.edu
 #SBATCH --mail-type=ALL
 #SBATCH -J compM2F
-#SBATCH -e 04.compare_M2F_alignments.j%j.err
-#SBATCH -o 04.compare_M2F_alignments.j%j.out
+#SBATCH -e slurm/04.compare_M2F_alignments.j%j.err
+#SBATCH -o slurm/04.compare_M2F_alignments.j%j.out
 #SBATCH -p high
 #SBATCH -c 20
 #SBATCH --time=02:22:22

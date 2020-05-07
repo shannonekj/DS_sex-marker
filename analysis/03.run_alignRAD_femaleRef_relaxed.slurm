@@ -2,8 +2,8 @@
 #SBATCH --mail-user=sejoslin@ucdavis.edu
 #SBATCH --mail-type=ALL
 #SBATCH -J aln2Fem
-#SBATCH -e 03.run_alignRAD_femaleRef_relaxed.j%j.err
-#SBATCH -o 03.run_alignRAD_femaleRef_relaxed.j%j.out
+#SBATCH -e slurm/03.run_alignRAD_femaleRef_relaxed.j%j.err
+#SBATCH -o slurm/03.run_alignRAD_femaleRef_relaxed.j%j.out
 #SBATCH -p high
 #SBATCH --time=00:02:22
 #SBATCH --mem=32G

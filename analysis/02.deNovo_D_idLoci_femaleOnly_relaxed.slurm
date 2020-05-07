@@ -2,8 +2,8 @@
 #BATCH --mail-user=sejoslin@ucdavis.edu
 #SBATCH --mail-type=ALL
 #SBATCH -J idLocF
-#SBATCH -e 02.deNovo_D_idLoci_femaleOnly_relaxed.j%j.err
-#SBATCH -o 02.deNovo_D_idLoci_femaleOnly_relaxed.j%j.out
+#SBATCH -e slurm/02.deNovo_D_idLoci_femaleOnly_relaxed.j%j.err
+#SBATCH -o slurm/02.deNovo_D_idLoci_femaleOnly_relaxed.j%j.out
 #SBATCH -c 20
 #SBATCH -p high
 #SBATCH --time=1-20:00:00

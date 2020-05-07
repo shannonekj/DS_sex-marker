@@ -2,8 +2,8 @@
 #BATCH --mail-user=sejoslin@ucdavis.edu
 #SBATCH --mail-type=ALL
 #SBATCH -J novo
-#SBATCH -e 02.deNovo_C_novoAlign_femaleOnly.j%j.err
-#SBATCH -o 02.deNovo_C_novoAlign_femaleOnly.j%j.out
+#SBATCH -e slurm/02.deNovo_C_novoAlign_femaleOnly.j%j.err
+#SBATCH -o slurm/02.deNovo_C_novoAlign_femaleOnly.j%j.out
 #SBATCH -c 20
 #SBATCH -p high
 #SBATCH --time=1-20:00:00

@@ -2,8 +2,8 @@
 #SBATCH --mail-user=sejoslin@ucdavis.edu
 #SBATCH --mail-type=ALL
 #SBATCH -J compM2F
-#SBATCH -e 05.analyze_compareDepths.1.j%j.err
-#SBATCH -o 05.analyze_compareDepths.1.j%j.out
+#SBATCH -e slurm/05.analyze_compareDepths.1.j%j.err
+#SBATCH -o slurm/05.analyze_compareDepths.1.j%j.out
 #SBATCH -p high
 #SBATCH -c 20
 #SBATCH --time=03-02:22:22

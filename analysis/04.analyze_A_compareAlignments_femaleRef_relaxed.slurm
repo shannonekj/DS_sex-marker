@@ -2,8 +2,8 @@
 #SBATCH --mail-user=sejoslin@ucdavis.edu
 #SBATCH --mail-type=ALL
 #SBATCH -J cmpFemRef
-#SBATCH -e 04.analyze_A_compareAlignments_femaleRef_relaxed.j%j.err
-#SBATCH -o 04.analyze_A_compareAlignments_femaleRef_relaxed.j%j.out
+#SBATCH -e slurm/04.analyze_A_compareAlignments_femaleRef_relaxed.j%j.err
+#SBATCH -o slurm/04.analyze_A_compareAlignments_femaleRef_relaxed.j%j.out
 #SBATCH -p high
 #SBATCH -c 20
 #SBATCH --time=02:22:22

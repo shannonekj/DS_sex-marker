@@ -2,8 +2,8 @@
 #SBATCH --mail-user=sejoslin@ucdavis.edu
 #SBATCH --mail-type=ALL
 #SBATCH -J alignRAD
-#SBATCH -e 03.run_alignRAD.j%j.err
-#SBATCH -o 03.run_alignRAD.j%j.out
+#SBATCH -e slurm/03.run_alignRAD.j%j.err
+#SBATCH -o slurm/03.run_alignRAD.j%j.out
 #SBATCH -c 20
 #SBATCH -p high
 #SBATCH --time=04:00:00
