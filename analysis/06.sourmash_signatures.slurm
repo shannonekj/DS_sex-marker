@@ -3,9 +3,9 @@
 #SBATCH -e slurm/06.sourmash_signatures.j%j.err
 #SBATCH -o slurm/06.sourmash_signatures.j%j.out
 #SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --mem=16gb
-#SBATCH --time=01-24:24:24
+#SBATCH --ntasks=8
+#SBATCH --mem=48gb
+#SBATCH --time=10-24:24:24
 #SBATCH -p high
 
 ###############
@@ -29,14 +29,15 @@ tenx_f_dir="/group/millermrgrp2/shannon/projects/assembly_genome_Hypomesus-trans
 tenx_f_r1="Smelt2F_S432_L004_R1_001.fastq.gz"
 tenx_f_r2="Smelt2F_S432_L004_R2_001.fastq.gz"
 
-out_dir="/home/sejoslin/git_repos/DS_sex-marker/results/sourmash"
+#out_dir="/home/sejoslin/git_repos/DS_sex-marker/results/sourmash"
+out_dir="/group/millermrgrp2/shannon/projects/DS_sex-marker/04-sourmash"
 
 ###################
 ###  DO THINGS  ###
 ###################
 
 # make output directory
-mkdir -p ${out_dir}
+[ -d ${out_dir} ] || mkdir -p ${out_dir}
 cd ${out_dir}
 
 # sym link tenx files
@@ -47,5 +48,7 @@ ln -s ${tenx_f_dir}/${tenx_f_r2} ${tenx_f_r2}
 
 
 # sourmash compute
+echo $(date +%D' '%T) "starting sourmash compute" 
 sourmash compute -k 21,31,51 --scaled 1000 --track-abundance *.fastq.gz -o sample.sig
+echo $(date +%D' '%T) "    sourmash run complete!"
 
