@@ -44,7 +44,8 @@ do
 	-doMajorMinor 1 \
 	-doMaf 1 \
 	-SNP_pval 1e-6 \
-	-out assoc_model${i}_LRT_${PROJ}"
+    -Pvalue 1 \
+	-out assoc_model${i}_pval_${PROJ}"
 	echo ${call_assoc}
 	eval ${call_assoc}
 	echo ""
