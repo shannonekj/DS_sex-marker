@@ -3,11 +3,14 @@
 use strict;
 use warnings;
 
-die "Usage: get_depth.pl <file>\n" if (@ARGV != 1);
+die "Usage: get_depth.pl <infile> <outfile>\n" if (@ARGV != 2);
 print "Getting depths from: $ARGV[0]\n";
 
-my ($file) = @ARGV;
+my ($file) = $ARGV[0];
 open(my $in, "< $file");
+my ($outfile) = $ARGV[1];
+open(my $out, "> $outfile") or die "error creating $outfile. $!";
+
 while (<$in>) {
     chomp;
     my @array = split(" ", $_);
@@ -17,7 +20,7 @@ while (<$in>) {
     my $total_coverage = eval join '+', @depth;
     my $mean_coverage;
     my $n_ind = 0;
-    for (my $i=0; $i <= 24; $i++) {
+    for (my $i = 0; $i <= 23; $i++) {
         if($depth[$i] > 0 ){
             $n_ind = $n_ind + 1;
         }
@@ -30,6 +33,7 @@ while (<$in>) {
 #    print "$chromosome\t$position ";
     print "[@depth]\t$total_coverage\n";
     print "Num Ind: $n_ind\nMean Coverage: $mean_coverage\n";
+    print $out "$chromosome\t$position\t$n_ind\t$mean_coverage\n";
 }
 close($in);
 
