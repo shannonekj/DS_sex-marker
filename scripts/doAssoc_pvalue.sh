@@ -53,7 +53,7 @@ done
 
 echo "Association tests are completed" $(date +%D' '%T)
 
-cat EOT << readme >> ${OUT_dir}/README
+cat << readme >> ${OUT_dir}/README
 This directory contains the following:
 	assoc_model?__${PROJ}.lrt  ==  tab separated plain text files output from association analysis on files in ${BAMLIST}
 		Chromosome	Position	Major	Minor	Frequency	N*	LRT	beta^	SE^	highHe*	highHo*	emIter~
