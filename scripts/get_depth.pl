@@ -31,12 +31,12 @@ while (<$in>) {
         $mean_coverage = 0;
     }
 #    print "$chromosome\t$position ";
-    print "[@depth]\t$total_coverage\n";
-    print "Num Ind: $n_ind\nMean Coverage: $mean_coverage\n";
+#    print "[@depth]\t$total_coverage\n";
+#    print "Num Ind: $n_ind\nMean Coverage: $mean_coverage\n";
     print $out "$chromosome\t$position\t$n_ind\t$mean_coverage\n";
 }
 close($in);
-
+close($out);
 
 
 ### (RE)LEARNING PERL
