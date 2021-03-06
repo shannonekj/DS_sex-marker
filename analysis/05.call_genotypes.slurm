@@ -47,15 +47,17 @@ bamlist="${out_dir}/bamlist"
 
 # make output directory
 [ -d ${out_dir} ] || mkdir -p ${out_dir}
+cd ${out_dir}
 
-# make bamlist (F first, then F)
-cd ${bam_dir}
-ls -l *_M_*sort-n.fixmate-m.sort.markdup-r.bam | awk '{print $9}' > ${bamlist}
-ls -l *_F_*sort-n.fixmate-m.sort.markdup-r.bam | awk '{print $9}' >> ${bamlist}
+# make bamlist (M first, then F)
+ls -l ${bam_dir}/*_M_*sort-n.fixmate-m.sort.markdup-r.bam | awk '{print $9}' > ${bamlist}
+ls -l ${bam_dir}/*_F_*sort-n.fixmate-m.sort.markdup-r.bam | awk '{print $9}' >> ${bamlist}
 
 cd ${out_dir}
 bash ${script_dir}/call_genotypes.sh ${out_dir} ${bamlist} ${prefix}
 
+
+sstat --format 'JobID,MaxRSS,AveCPU' -P ${SLURM_JOB_ID}.batch
 end=`date +%s`
 runtime=$((end-start))
 echo "Runtime : "${runtime}
