@@ -32,8 +32,8 @@ BAMLIST=$2	# list of bamfiles (global path)
 PREFIX=$3   # project descriptor
 
 # internal
-nInd=\$(wc -l ${BAMLIST} | awk '{print \$1}')
-mInd=\$((\${nInd}/2))
+nInd=$(wc -l ${BAMLIST} | awk '{print $1}')
+mInd=$((${nInd}/2))
 
 ###################
 ###  DO THINGS  ###
