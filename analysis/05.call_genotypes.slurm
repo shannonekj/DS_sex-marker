@@ -45,13 +45,15 @@ bamlist="${out_dir}/bamlist"
 ###  RUN  ###
 #############
 
-
+# make output directory
+[ -d ${out_dir} ] || mkdir -p ${out_dir}
 
 # make bamlist (F first, then F)
 cd ${bam_dir}
-ls -l *M*sort-n.fixmate-m.sort.markdup-r.bam | awk '{print $9}' > ${bamlist}
-ls -l *F*sort-n.fixmate-m.sort.markdup-r.bam | awk '{print $9}' >> ${bamlist}
+ls -l *_M_*sort-n.fixmate-m.sort.markdup-r.bam | awk '{print $9}' > ${bamlist}
+ls -l *_F_*sort-n.fixmate-m.sort.markdup-r.bam | awk '{print $9}' >> ${bamlist}
 
+cd ${out_dir}
 bash ${script_dir}/call_genotypes.sh ${out_dir} ${bamlist} ${prefix}
 
 end=`date +%s`
