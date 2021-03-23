@@ -2,10 +2,10 @@
 #SBATCH -J geno
 #SBATCH -e slurm/j%j.call_genotypes.err
 #SBATCH -o slurm/j%j.call_genotypes.out
-#SBATCH -c 20
-#SBATCH -p high
-#SBATCH --time=16:00:00
-#SBATCH --mem=32G
+#SBATCH -n 20
+#SBATCH -p bigmemh
+#SBATCH --time=02-16:00:00
+#SBATCH --mem=256G
 
 # Call genotypes from alignments to the MALE assembly
 
@@ -13,6 +13,7 @@
 . ~/miniconda3/etc/profile.d/conda.sh
 
 # activate conda env
+echo "activating ANGSD conda environment"
 conda activate ANGSD
 
 # fail on weird errors
@@ -39,7 +40,12 @@ data_dir="/group/millermrgrp2/shannon/projects/DS_sex-marker"
 bam_dir="${data_dir}/00-alignments_${sex}"
 out_dir="${data_dir}/02-genotypes"
 
+# files
 bamlist="${out_dir}/bamlist"
+
+# other variables
+threads=${SLURM_NTASKS}
+
 
 #############
 ###  RUN  ###
@@ -54,7 +60,7 @@ ls -l ${bam_dir}/*_M_*sort-n.fixmate-m.sort.markdup-r.bam | awk '{print $9}' > $
 ls -l ${bam_dir}/*_F_*sort-n.fixmate-m.sort.markdup-r.bam | awk '{print $9}' >> ${bamlist}
 
 cd ${out_dir}
-bash ${script_dir}/call_genotypes.sh ${out_dir} ${bamlist} ${prefix}
+bash ${script_dir}/call_genotypes.sh ${out_dir} ${bamlist} ${prefix} ${threads}
 
 
 sstat --format 'JobID,MaxRSS,AveCPU' -P ${SLURM_JOB_ID}.batch
