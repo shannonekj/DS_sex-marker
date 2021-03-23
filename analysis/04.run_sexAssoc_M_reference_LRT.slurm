@@ -2,7 +2,7 @@
 #SBATCH -J sexAssoM
 #SBATCH -e slurm/j%j.run_sexAssoc_M_reference_LRT.err
 #SBATCH -o slurm/j%j.run_sexAssoc_M_reference_LRT.out
-#SBATCH -c 20
+#SBATCH -n 20
 #SBATCH -p high
 #SBATCH --time=16:00:00
 #SBATCH --mem=32G
@@ -24,7 +24,7 @@ sex="M"
 script_dir="/home/sejoslin/git_repos/${proj}/scripts"
 data_dir="/group/millermrgrp2/shannon/projects/DS_sex-marker"
 bam_dir="${data_dir}/00-alignments_${sex}"
-out_dir="${data_dir}/01-association_${sex}_reference"
+out_dir="${data_dir}/01-association_${sex}_reference_genotypes"
 
 # files
 	# make bam
@@ -34,13 +34,15 @@ ls -al ${bam_dir}/*.sort-n.fixmate-m.sort.markdup-r.bam | awk '{print $9}' >> ${
 bamlist="${out_dir}/bamlist"
 ybin="/home/sejoslin/git_repos/${proj}/metadata/DS_sex-marker.pheno.ybin"
 
+threads=${SLURM_NTASKS}
+
 
 
 #############
 ###  RUN  ###
 #############
 
-bash ${script_dir}/doAssoc_LRT.sh ${out_dir} ${bamlist} ${proj} ${ybin}
+bash ${script_dir}/doAssoc_LRT_w_geno.sh ${out_dir} ${bamlist} ${proj} ${ybin} ${threads}
 
 
 
