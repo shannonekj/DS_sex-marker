@@ -1,5 +1,10 @@
 #!/usr/bin/perl
-# get_depth.pl
+# File: get_depth.pl
+# Author: Shannon E.K. Joslin
+# Date: 23 March 2021
+# Usage: perl get_depth.pl <in_file> <out_file>
+# Use: will get number of individuals with sequence coverage and the mean coverage for all individuals in a file
+# Notes: eventually should add in total coverage
 use strict;
 use warnings;
 
