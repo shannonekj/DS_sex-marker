@@ -30,6 +30,7 @@ echo "Setting up variables" $(date +%D' '%T)
 OUT_DIR=$1	# directory where output will be written to
 BAMLIST=$2	# list of bamfiles (global path)
 PREFIX=$3   # project descriptor
+THREADS=$4  # n threads used
 
 # internal
 nInd=$(wc -l ${BAMLIST} | awk '{print $1}')
@@ -57,6 +58,7 @@ call_geno="angsd \
     -postCutoff 0.85 \
     -minMaf 0.05 \
     -SNP_pval 1e-6 \
+    -nThreads ${THREADS} \
     -out ${PREFIX}
 "
 
