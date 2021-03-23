@@ -2,9 +2,10 @@
 # File: get_depth_24v24.pl
 # Author: Shannon E.K. Joslin
 # Date: 23 March 2021
-# Usage: perl get_depth.pl <in_file> <out_file>
+# Usage: perl get_depth_24v24.pl <in_file> <out_file>
 # Use: will compare the first 24 individuals' depth stats to a second set of individuals' depth stats.
-# Notes: eventually should make this take in n individuals and compare to x individuals (so can enter numbers at the cmdlne)
+# Notes:  * eventually should make this take in n individuals and compare to x individuals (so can enter numbers at the cmdlne)
+#         * add in total coverage
 use strict;
 use warnings;
 
@@ -60,43 +61,3 @@ close($in);
 close($out);
 
 
-### (RE)LEARNING PERL
-
-#my @file = <>;
-#print "$file[0]";
-
-# this prints each line of a file
-#while (<>) {
-#    print;
-#}
-
-# turns into uppercase
-#my ($file) = @ARGV;
-#open(my $in, "< $file");
-#while (my $line = <$in>) {
-#    $line = uc($line);
-#    my @first = qw(print($line));
-#    print "$line";
-#    print "$first[0]\n";
-#}
-#close($in);
-
-# prints one line....
-#open(my $in, "< $file");
-#my $locus;
-#while (my @line = <$in>) {
-#    $locus = $line[1];
-#    print $locus;
-#}
-#close($in)
-
-
-# prints number of lines and the number of characters
-#my $lines = 0;
-#my $characters = 0;
-#while (my $line = <>) {
-#    $lines++;
-#    $characters += length($line);
-#}
-#
-#print "$lines\t$characters\n";
