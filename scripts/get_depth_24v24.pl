@@ -16,6 +16,7 @@ my ($file) = $ARGV[0];
 open(my $in, "< $file");
 my ($outfile) = $ARGV[1];
 open(my $out, "> $outfile") or die "error creating $outfile. $!";
+open(my $log, "> $outfile.fmt") or die "error creating $outfile.fmt. $!";
 
 while (<$in>) {
     chomp;
@@ -55,9 +56,10 @@ while (<$in>) {
 #    print "$chromosome\t$position ";
 #    print "[@depth]\t$total_coverage\n";
 #    print "Num Ind: $n_ind\nMean Coverage: $mean_coverage\n";
-    print $out "$chromosome\t$position\t$n_ind_M\t$mean_coverage_M\t$n_ind_F\t$mean_coverage_F\n";
+    print $log "Format of $outfile is: CHROMOSOME\tPOSITION\tM_IND_W_COV\tM_TOTAL_COV\tM_MEAN_COV\tF_IND_W_COV\tF_TOTAL_COV\tF_MEAN_COV\n";
+    print $out "$chromosome\t$position\t$n_ind_M\t$total_coverage_M\t$mean_coverage_M\t$n_ind_F\t$total_coverage_F\t$mean_coverage_F\n";
 }
 close($in);
 close($out);
-
+close($log);
 
