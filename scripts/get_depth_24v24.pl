@@ -5,7 +5,7 @@
 # Usage: perl get_depth_24v24.pl <in_file> <out_file>
 # Use: will compare the first 24 individuals' depth stats to a second set of individuals' depth stats.
 # Notes:  * eventually should make this take in n individuals and compare to x individuals (so can enter numbers at the cmdlne)
-#         * add in total coverage
+
 use strict;
 use warnings;
 
@@ -57,9 +57,11 @@ while (<$in>) {
 #    print "$chromosome\t$position ";
 #    print "[@depth]\t$total_coverage\n";
 #    print "Num Ind: $n_ind\nMean Coverage: $mean_coverage\n";
-    print $log "Format of $outfile is: CHROMOSOME\tPOSITION\tM_IND_W_COV\tM_TOTAL_COV\tM_MEAN_COV\tF_IND_W_COV\tF_TOTAL_COV\tF_MEAN_COV\tCOV_DIFF\n";
     print $out "$chromosome\t$position\t$n_ind_M\t$total_coverage_M\t$mean_coverage_M\t$n_ind_F\t$total_coverage_F\t$mean_coverage_F\t$abs_diff\n";
 }
+
+print $log "Format of $outfile is: CHROMOSOME\tPOSITION\tM_IND_W_COV\tM_TOTAL_COV\tM_MEAN_COV\tF_IND_W_COV\tF_TOTAL_COV\tF_MEAN_COV\tCOV_DIFF\n";
+
 close($in);
 close($out);
 close($log);
