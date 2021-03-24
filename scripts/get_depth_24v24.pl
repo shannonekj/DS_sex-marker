@@ -53,11 +53,12 @@ while (<$in>) {
         }else{
         $mean_coverage_F = 0;
     }
+    my $abs_diff = abs($n_ind_M-$n_ind_F); 
 #    print "$chromosome\t$position ";
 #    print "[@depth]\t$total_coverage\n";
 #    print "Num Ind: $n_ind\nMean Coverage: $mean_coverage\n";
-    print $log "Format of $outfile is: CHROMOSOME\tPOSITION\tM_IND_W_COV\tM_TOTAL_COV\tM_MEAN_COV\tF_IND_W_COV\tF_TOTAL_COV\tF_MEAN_COV\n";
-    print $out "$chromosome\t$position\t$n_ind_M\t$total_coverage_M\t$mean_coverage_M\t$n_ind_F\t$total_coverage_F\t$mean_coverage_F\n";
+    print $log "Format of $outfile is: CHROMOSOME\tPOSITION\tM_IND_W_COV\tM_TOTAL_COV\tM_MEAN_COV\tF_IND_W_COV\tF_TOTAL_COV\tF_MEAN_COV\tCOV_DIFF\n";
+    print $out "$chromosome\t$position\t$n_ind_M\t$total_coverage_M\t$mean_coverage_M\t$n_ind_F\t$total_coverage_F\t$mean_coverage_F\t$abs_diff\n";
 }
 close($in);
 close($out);
