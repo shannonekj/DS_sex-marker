@@ -5,7 +5,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=8
 #SBATCH --mem=48gb
-#SBATCH --time=01-04:08:16
+#SBATCH --time=01-04:08
 #SBATCH -p high
 
 
@@ -47,7 +47,7 @@ ref_pre=$(echo $ref_short | cut -f1 -d.)
 bowtie2-build -f ${ref_short} ${ref_pre}
 
 # align putative Y to reference
-bowtie2 --end-to-end -p ${SLURM_NTASKS} -x ${ref_pre} -r ${put_y} -S ${prefix_out}.sam
+bowtie2 --end-to-end -p ${SLURM_NTASKS} -x ${ref_pre} -f ${put_y} -S ${prefix_out}.sam
 
 # create sorted BAM
 conda activate samtools
