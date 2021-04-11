@@ -92,14 +92,14 @@ hostname
 start=\`date +%s\`
 echo "My SLURM_JOB_ID: \$SLURM_JOB_ID"
 
-R1=${prefix}_R1.fastq
-R2=${prefix}_R2.fastq
+R1="${data_dir}/${prefix}_R1.fastq"
+R2="${data_dir}/${prefix}_R2.fastq"
 
 cd ${out_dir}
 
 # RUN
 ## alignment
-bowtie2 --end-to-end -p \${SLURM_NTASKS} -x \${ref_pre} -1 \${R1} -2 \${R2} -S ${prefix}.sam
+bowtie2 --end-to-end -p \${SLURM_NTASKS} -x ${ref_pre} -1 \${R1} -2 \${R2} -S ${prefix}.sam
 ## make bams
 conda activate samtools
 samtools view -Sb ${prefix}.sam | samtools sort -n - | samtools fixmate -m - ${prefix}.sort-n.fixmate-m.bam
